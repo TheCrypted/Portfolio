@@ -21,7 +21,7 @@ export const Cursor = () => {
 
     return (
         <>
-            <div style={{pointerEvents: "none", transition: "width 0.4s, height 0.4s", mixBlendMode: "difference"}} ref={cursorSlow} className={"mix-blend-difference rounded-full " + (linkOver ? "h-0 w-0" : "h-16 w-16") + " border-solid border-2 z-0 absolute cursor"} >
+            <div style={{pointerEvents: "none", transition: "width 0.4s, height 0.4s", mixBlendMode: "difference"}} ref={cursorSlow} className={"mix-blend-difference rounded-full " + (linkOver ? "h-0 w-0" : "h-16 w-16") + " border-solid border-2 z-50 absolute cursor"} >
             </div>
             <div style={{pointerEvents: "none", transition: "width 0.2s, height 0.2s"}} ref={cursor} className={"transition-transform duration-600 mix-blend-difference bg-white rounded-full " + (linkOver ? "h-16 w-16" : "h-4 w-4" )+ " z-50 absolute cursor"} >
             </div>
