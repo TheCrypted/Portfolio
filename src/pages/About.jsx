@@ -8,6 +8,8 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { a as three } from '@react-spring/three'
 import { a as web } from '@react-spring/web'
 import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
+import img from "../assets/img_a.jpg"
+import {ExpBlock} from "../components/ExpBlock.jsx";
 
 function Model({ open, hinge, ...props }) {
     const group = useRef()
@@ -71,8 +73,8 @@ export const About = () => {
     return (
         <>
         <Cursor />
-        <div className="absolute scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
-            <div className=" absolute top-0 w-full h-20 z-20 bg-[#1d184f] backdrop-blur-md bg-opacity-5 border-b border-indigo-800"></div>
+            <div className="absolute z-20 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl"></div>
+            <div className="relative overflow-x-hidden scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
             <div className="w-full h-20"></div>
             <div style={{backgroundImage: `url("../src/assets/name.png")`}} className="bg-no-repeat bg-contain bg-[center_top_1rem] relative w-full h-[90%]">
                 <div className={`w-full h-full absolute transition-all ${open ? "backdrop-blur-sm" : ""}`}>
@@ -88,10 +90,26 @@ export const About = () => {
                         </Canvas>
                 </div>
             </div>
-            <div style={{fontFamily: "Chamberi Super Display"}} className="w-full text-white h-1/6 relative grid grid-cols-3">
-                <div className="border-t border-white"></div>
-                <div className="border-b border-white"></div>
-                <div className="border-b border-white"></div>
+            <div style={{fontFamily: "Chamberi Super Display"}} className="w-full text-2xl text-white h-auto relative pl-14">
+                About <b className="text-blue-600">/</b>
+                <div className="w-full h-auto flex">
+                    <div className="w-1/2 text-white mt-6 mb-6 text-6xl">
+                        Full-stack developer studying at the University of Edinburgh. Building scalable, user-friendly applications.
+                    </div>
+                </div>
+                <div className="absolute right-0 w-2/5 flex items-center top-0 h-full">
+                    <div style={{backgroundImage: `url("${img}")`}} className="bg-cover bg-center bg-no-repeat shadow-xl w-full h-2/3 rounded-l-xl" />
+                </div>
+            </div>
+            <div className="w-full h-16"/>
+            <div className="w-full h-full pt-6 pb-6 text-2xl font-serif pl-14 pr-14 text-white">
+                Work Experience <b className="text-blue-600">/</b>
+                <div className="w-full overflow-hidden h-auto pt-6">
+                    <ExpBlock ind={"00"} rot={-8} role="Spring Insight">Morgan Stanley</ExpBlock>
+                    <ExpBlock ind={"01"} rot={7} role="Software Engineering Intern">Cadence</ExpBlock>
+                    <ExpBlock ind={"02"} rot={-10} role="Simulation Software Engineer">Formula Student</ExpBlock>
+                    <ExpBlock ind={"03"} rot={12} role="Spring Insight">Mckinsey & Co</ExpBlock>
+                </div>
             </div>
         </div>
     </>
