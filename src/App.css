@@ -6,7 +6,7 @@
     height: 100%;
     width: 100%;
     cursor: none;
-    overflow-x: hidden;
+    overflow: hidden;
   }
   #root {
     height: 100%;
@@ -28,5 +28,31 @@
 
   .hide-spin-buttons {
     -moz-appearance: textfield;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px); /* Adjust this value for more or less movement */
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite; /* Adjust the duration for speed */
+  }
+
+  @keyframes float-dif {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(3px); /* Adjust this value for more or less movement */
+    }
+  }
+
+  .animate-float-dif {
+    animation: float-dif 3s ease-in-out infinite; /* Adjust the duration for speed */
   }
 }

@@ -25,7 +25,7 @@ export const BorderMarqY = ({displacement}) => {
             {
                 Array.from({length: 20}).map((item, ind) => {
                     return (
-                        <div key={ind} className="py-2  w-full flex text-xl italic items-center justify-center font-serif [writing-mode:vertical-rl]">
+                        <div key={ind} className="py-2 w-full flex text-xl italic items-center justify-center font-serif [writing-mode:vertical-rl]">
                             Aman Sharma
                         </div>
                     )
