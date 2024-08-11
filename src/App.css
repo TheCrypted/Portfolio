@@ -29,6 +29,9 @@
   .hide-spin-buttons {
     -moz-appearance: textfield;
   }
+  a {
+    cursor: none;
+  }
 
   @keyframes float {
     0%, 100% {

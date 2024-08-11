@@ -13,6 +13,8 @@ import {ProjBlock} from "../components/ProjBlock.jsx";
 import {EdBack} from "../components/EdBack.jsx";
 import {LoadAnim} from "../components/LoadAnim.jsx";
 import {useMousePosition} from "../context/MousePositionProvider.jsx";
+import DateObject from "react-date-object";
+import {useNavigate} from "react-router-dom";
 
 function Model({ open, hinge, ...props }) {
     const group = useRef()
@@ -75,8 +77,16 @@ export const About = () => {
     const [expand, setExpand] = useState(null);
     const [loaded, setLoaded] = useState(false);
     const mousePos = useMousePosition();
-    const TEXTS = ['Contact', 'Get in Touch'];
-    const [contact, setContact] = useState(false)
+    const navigate = useNavigate();
+
+    const date = new DateObject({
+        date: new Date(),
+        format: "DD MMMM YYYY",
+    });
+    const time = new DateObject({
+        date: new Date(),
+        format: "HHMM",
+    });
 
     useEffect(() => {
         setTimeout(() => {
@@ -84,17 +94,23 @@ export const About = () => {
         }, 1000);
     }, []);
 
-    const mock = ["Poland", "Germany", "UK", "Spain"];
-    const [index, setIndex] = React.useState(0);
+    const changePage = (dest) => {
+        setLoaded(false);
+    }
 
     return (
         <>
         <Cursor />
-        <LoadAnim loaded={loaded}/>
+        <LoadAnim loaded={true}/>
             <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_60%_10%]">
-                <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
-                <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">ABOUT</div>
-                <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">GALLERY</div>
+                <div onClick={() => changePage("/About")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
+                <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK</div>
+                <div onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS</div>
+                <div className="absolute  right-0 w-1/5 h-full flex items-center justify-center pr-14">
+                    <div className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-full h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
+                        Website under active development
+                    </div>
+                </div>
             </div>
             <div
                 className="relative overflow-x-hidden scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
@@ -170,16 +186,29 @@ export const About = () => {
                         </div>
                     </div>
                     <div className="w-full h-auto flex justify-center pt-12">
-                        <a href="mailto:mail.aman@protonmail.com">
+                        <a href="mailto:mail.aman@protonmail.com" className="outline-none">
                             <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="cursor-none w-80 hover:[filter:blur(1px)] transition-all hover:scale-110 overflow-hidden h-12 text-white p-1 hover:bg-white hover:text-[#1d184f] px-4 text-2xl rounded-l-full rounded-r-full border-2 border-white flex items-center justify-center">
                                 Contact Me
                             </div>
                         </a>
                     </div>
                 </div>
-                <div className="w-full h-8"/>
-                <div className="w-full h-1/3 pt-6 pb-6 bg-blue-950 text-2xl font-serif text-white">
-
+                <div className="w-full grid grid-cols-[20%_60%_20%] h-1/6 pt-6 pb-6  bg-opacity-40 text-2xl font-serif text-white"> {/*  bg-[#191443]*/}
+                    <div className="text-sm pl-14 flex items-center ">
+                        <div>
+                            <div>Aman Sharma</div>
+                            <div><i>{date.format()}</i></div>
+                            <div>{time.format()} &nbsp; hrs</div>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div className="pr-14 flex text-right items-center text-sm justify-end">
+                        <div>
+                            <a href="https://www.linkedin.com/in/aman-sharma-992a6a285/" onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}><div className="transition-all hover:[filter:blur(1px)]">LinkedIn</div></a>
+                            <a href="https://github.com/TheCrypted" onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}><div className="transition-all hover:[filter:blur(1px)]">Github</div></a>
+                            <a href="https://www.kaggle.com/amansharma110" onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}><div className="transition-all hover:[filter:blur(1px)]">Kaggle</div></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </>
