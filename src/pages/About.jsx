@@ -1,18 +1,18 @@
 import {Cursor} from "../components/Cursor.jsx";
 import * as THREE from 'three'
-import { Html, Environment, useGLTF, ContactShadows } from '@react-three/drei'
+import { Environment, useGLTF, ContactShadows } from '@react-three/drei'
 import model from "./mac-draco.glb"
 import {useSpring} from "@react-spring/three";
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { a as three } from '@react-spring/three'
-import { a as web } from '@react-spring/web'
 import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
 import img from "../assets/img_a.jpg"
 import {ExpBlock} from "../components/ExpBlock.jsx";
 import {ProjBlock} from "../components/ProjBlock.jsx";
-import {Background} from "./Background.jsx";
 import {EdBack} from "../components/EdBack.jsx";
+import {LoadAnim} from "../components/LoadAnim.jsx";
+import {useMousePosition} from "../context/MousePositionProvider.jsx";
 
 function Model({ open, hinge, ...props }) {
     const group = useRef()
@@ -69,21 +69,35 @@ function Model({ open, hinge, ...props }) {
 
 
 export const About = () => {
-    const [open, setOpen] = useState(true)
-    const props = useSpring({ open: Number(open) })
-    const {setLinkOver} = queryLinkOver()
-    const [expand, setExpand] = useState(null)
+    const [open, setOpen] = useState(true);
+    const props = useSpring({ open: Number(open) });
+    const {setLinkOver} = queryLinkOver();
+    const [expand, setExpand] = useState(null);
+    const [loaded, setLoaded] = useState(false);
+    const mousePos = useMousePosition();
+    const TEXTS = ['Contact', 'Get in Touch'];
+    const [contact, setContact] = useState(false)
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoaded(true);
+        }, 1000);
+    }, []);
+
+    const mock = ["Poland", "Germany", "UK", "Spain"];
+    const [index, setIndex] = React.useState(0);
 
     return (
         <>
         <Cursor />
+        <LoadAnim loaded={loaded}/>
             <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_60%_10%]">
-
                 <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
                 <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">ABOUT</div>
                 <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">GALLERY</div>
             </div>
-            <div className="relative overflow-x-hidden scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
+            <div
+                className="relative overflow-x-hidden scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
                 <div className="w-full h-20"></div>
                 <div style={{backgroundImage: `url("../src/assets/name.png")`}} className="bg-no-repeat bg-contain bg-[center_top_1rem] relative w-full h-[90%]">
                     <div className={`w-full h-full absolute transition-all ${open ? "backdrop-blur-sm" : ""}`}>
@@ -129,7 +143,7 @@ export const About = () => {
                         Background <b className="text-blue-600">/</b>
                     </div>
                     <div className="w-full pt-12 h-full flex">
-                        <EdBack />
+                        <EdBack/>
                     </div>
                 </div>
                 <div className="w-full h-16"/>
@@ -142,6 +156,30 @@ export const About = () => {
                         <ProjBlock open={expand} setOpen={setExpand} ind={3}>Ray Tracer</ProjBlock>
                         <ProjBlock open={expand} setOpen={setExpand} ind={4}>Plant Guard</ProjBlock>
                     </div>
+                </div>
+                <div className="w-full h-20"/>
+                <div className="w-full h-1/2 pt-6 pb-6 text-2xl font-serif text-white">
+                    <div className="w-full h-auto text-8xl text-white text-nowrap overflow-hidden opacity-50">
+                        <div style={{left: `${-500 + mousePos.x*0.2}px`}} className="relative">
+                            Contact Me // Contact Me // Contact Me // Contact Me // Contact Me
+                        </div>
+                    </div>
+                    <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="w-full transition-colors h-auto text-8xl text-white text-nowrap overflow-hidden ">
+                        <div style={{left: `${-500 - mousePos.x*0.2}px`}} className="relative">
+                            Contact Me // Contact Me // Contact Me // Contact Me // Contact Me
+                        </div>
+                    </div>
+                    <div className="w-full h-auto flex justify-center pt-12">
+                        <a href="mailto:mail.aman@protonmail.com">
+                            <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="cursor-none w-80 hover:[filter:blur(1px)] transition-all hover:scale-110 overflow-hidden h-12 text-white p-1 hover:bg-white hover:text-[#1d184f] px-4 text-2xl rounded-l-full rounded-r-full border-2 border-white flex items-center justify-center">
+                                Contact Me
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div className="w-full h-8"/>
+                <div className="w-full h-1/3 pt-6 pb-6 bg-blue-950 text-2xl font-serif text-white">
+
                 </div>
             </div>
         </>

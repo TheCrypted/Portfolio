@@ -6,7 +6,7 @@ import {ReactTyped} from "react-typed";
 export const EdBack = () => {
     const heightRef = useRef(null);
     const [hover, setHover] = useState(false);
-    const typedRef = useRef(null);
+    const [hover2, setHover2] = useState(false);
 
     const handleMouseEnter = () => {
         setHover(true)
@@ -14,6 +14,14 @@ export const EdBack = () => {
 
     const handleMouseLeave = () => {
         setHover(false)
+    };
+
+    const handleMouseEnter2 = () => {
+        setHover2(true)
+    };
+
+    const handleMouseLeave2 = () => {
+        setHover2(false)
     };
 
     return (
@@ -26,15 +34,28 @@ export const EdBack = () => {
                 <div style={{left: "200px"}} className="w-auto h-auto top-40 animate-float absolute z-30 text-8xl ">
                     of Edinburgh
                 </div>
-                <div style={{left: `${600 + heightRef.current?.clientHeight - 20}px`}} className="pt-6 w-full h-1/2 absolute">
-                    <div className={`${hover ? "h-8" : "h-0"} relative w-fit transition-all duration-700 text-nowrap overflow-hidden`}>
+                <div style={{left: `${550 + heightRef.current?.clientHeight - 20}px`}} className="flex items-center flex-wrap pt-6 w-full h-1/2 relative pr-14">
+                    <div
+                        className={`${hover ? "h-8" : "h-0"} mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
                         BEng(Hons.) Computer Science
-                        <div className="bg-red-500 w-8 h-8 z-50">dew
-                        </div>
+                    </div>
+                    <div className={`${hover ? "h-8" : "h-0"} mb-2  w-full transition-all duration-700  overflow-hidden`}>
+                        <i>Penultimate Year Student</i>
+                    </div>
+                    <div
+                        className={`${hover ? "h-8" : "h-0"} mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        Grade Classification: Expected First Class
+                    </div>
+                    <div
+                        className={`${hover ? "h-24" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>
+                        Relevant Modules: Computer Systems, Object Orientated Programming, <br/>
+                        Algorithms and Data Structures, Foundational Data Science, <br/>
+                        Software Engineering and Professional Practices, <br/>
+                        Reasoning and Agents, Discrete Mathematics
                     </div>
                 </div>
             </div>
-            <div className="w-full h-full relative opacity-50 hover:opacity-100 transition-opacity">
+            <div onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2} className="w-full h-full relative opacity-50 hover:opacity-100 transition-opacity">
                 <div style={{
                     left: "420px",
                     backgroundImage: `url("${penn}")`,
@@ -46,6 +67,28 @@ export const EdBack = () => {
                 </div>
                 <div style={{left: "00px"}} className="w-auto h-auto top-48 animate-float absolute z-30 text-8xl ">
                     of Pennsylvania
+                </div>
+                <div style={{left: `${410 + heightRef.current?.clientHeight}px`}}
+                     className="flex items-center flex-wrap pt-6 w-full h-1/2 relative pr-14">
+                    <div
+                        className={`${hover2 ? "h-8" : "h-0"} mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        BEng(Hons.) Computer Science
+                    </div>
+                    <div
+                        className={`${hover2 ? "h-8" : "h-0"} mb-2  w-full transition-all duration-700  overflow-hidden`}>
+                        <i>Academic Exchange</i>
+                    </div>
+                    <div
+                        className={`${hover2 ? "h-8" : "h-0"} mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        GPA: <i>Unreleased</i>
+                    </div>
+                    <div
+                        className={`${hover2 ? "h-24" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>
+                        Relevant Modules: FinTech, Database and Information <br/>
+                        Systems, Computer and Network Security, Natural Language Processing, <br />
+                        Applied Machine Learning, Compilers and Interpreters,<br/>
+                        Computer Operating Systems
+                    </div>
                 </div>
             </div>
         </div>
