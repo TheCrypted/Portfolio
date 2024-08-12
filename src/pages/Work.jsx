@@ -11,8 +11,7 @@ export const Work = () => {
 
     useEffect(() => {
         mindiv.current.addEventListener("scroll", () => {
-            console.log(mindiv.current.scrollTop/200)
-            setBustY(mindiv.current.scrollTop/200)
+            setBustY(mindiv.current.scrollTop/100)
         })
         setTimeout(() => {
             setLoaded(true);
@@ -22,10 +21,10 @@ export const Work = () => {
     return (
         <>
             <LoadAnim loaded={loaded}/>
-            <div ref={mindiv} className="w-full cursor-none h-full bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
+            <div ref={mindiv} className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
-                <div className="w-full cursor-none h-full">
-                    <Bust position={[0, bustY/200, 0]} scrollDiv={mindiv.current} />
+                <div className="w-full cursor-none h-full ">
+                    <Bust rotation={[0, bustY/10 * Math.PI-2.3, 0.4]} position={[bustY*3-11, -3-bustY/20, bustY]}/>
                 </div>
                 <div className="w-full cursor-none h-full">
 

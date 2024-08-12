@@ -1,9 +1,11 @@
 import React, {useEffect, useRef} from 'react'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import {useGLTF, useAnimations, useScroll} from '@react-three/drei'
 import model from "../assets/bust.glb"
 import * as THREE from "three";
+import {useFrame} from "@react-three/fiber";
 
-export function BustModel(props) {
+export function BustModel({position, ...props}) {
+    const scroll = useScroll()
     const group = useRef()
     const { nodes, materials, animations } = useGLTF(model)
     const { actions } = useAnimations(animations, group)
@@ -25,9 +27,22 @@ export function BustModel(props) {
         });
     };
 
+    const setAllAnimationsToPercentage = (percentage) => {
+        Object.values(actions).forEach((action) => {
+            const totalDuration = action.getClip().duration;
+            const currentTime = totalDuration * (percentage / 100);
+            action.time = currentTime;
+            action.play().paused = true;
+        });
+    };
+
+    useEffect(() => {
+        // Example: Set all animations to 50% of their duration
+        setAllAnimationsToPercentage(position[2]*10);
+    }, [position[2]]);
+
     return (
-        <group ref={group} {...props} dispose={null} onPointerOver={handlePointerOver}
-               onPointerOut={handlePointerOut}>
+        <group ref={group} position={position} {...props} dispose={null} >
             <group name="Scene">
                 <group name="Mesh_0001_cell001" position={[1.166, 5.663, 0.045]}>
                     <mesh

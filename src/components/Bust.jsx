@@ -1,11 +1,8 @@
-import * as THREE from 'three';
 import React, { Suspense, useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
-import bustModel from "../pages/mac-draco.glb"
 import {BustModel} from "../models/BustModel.jsx";
 
-export default function Bust({scrollDiv, position}) {
+export default function Bust({position, rotation}) {
     return (
         <Canvas dpr={[1, 2]} camera={{ position: [-20, 20, 20], fov: 25 }}>
             <Suspense >
@@ -13,7 +10,7 @@ export default function Bust({scrollDiv, position}) {
                 <directionalLight position={[-10, 10, 5]} intensity={1} />
                 <directionalLight position={[-10, 20, 0]} intensity={1.5} />
                 <directionalLight position={[0, -10, 0]} intensity={0.25} />
-                <BustModel scrolldiv={scrollDiv} position={position} />
+                <BustModel rotation={rotation} scale={1.2} position={position} />
             </Suspense>
         </Canvas>
     );
