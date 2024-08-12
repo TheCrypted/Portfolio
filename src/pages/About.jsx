@@ -96,14 +96,17 @@ export const About = () => {
 
     const changePage = (dest) => {
         setLoaded(false);
+        setTimeout(() => {
+            navigate(dest)
+        }, 2000)
     }
 
     return (
         <>
         <Cursor />
-        <LoadAnim loaded={true}/>
+        <LoadAnim loaded={loaded}/>
             <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_60%_10%]">
-                <div onClick={() => changePage("/About")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
+                <div onClick={() => changePage("/")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
                 <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK</div>
                 <div onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS</div>
                 <div className="absolute  right-0 w-1/5 h-full flex items-center justify-center pr-14">

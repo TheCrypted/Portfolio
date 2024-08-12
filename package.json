@@ -26,6 +26,7 @@
     "maath": "^0.10.8",
     "postprocessing": "^6.36.0",
     "react": "^18.2.0",
+    "react-animated-cursor": "^2.11.2",
     "react-collapse": "^5.1.1",
     "react-content-loader": "^7.0.2",
     "react-date-object": "^2.1.9",
@@ -35,7 +36,8 @@
     "react-typed": "^2.0.12",
     "react-use-rect": "^2.0.5",
     "styled-components": "^6.1.12",
-    "three": "^0.167.1"
+    "three": "^0.167.1",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

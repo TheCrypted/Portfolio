@@ -4,6 +4,7 @@ import {Home} from "./pages/Home.jsx";
 import {Gallery} from "./pages/Gallery.jsx";
 import {About} from "./pages/About.jsx";
 import {Background} from "./pages/Background.jsx";
+import {Work} from "./pages/Work.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -12,6 +13,7 @@ const router = createBrowserRouter(
             <Route path="/Gallery" element={<Gallery />}/>
             <Route path="/About" element={<About />}/>
             <Route path="/Test" element={<Background />}/>
+            <Route path="/Work" element={<Work />}/>
         </>
     )
 )

@@ -14,12 +14,12 @@ export const LoadAnim = ({loaded}) => {
     }, [loaded])
 
     return (
-        <div className={`w-full h-full ${display ? "opacity-100" : "opacity-0 -z-10"} absolute z-50 flex`}>
+        <div style={{zIndex: display ? "" : "-100"}} className={`w-full h-full ${display ? "opacity-100" : "opacity-0"} cursor-none absolute z-50 flex`}>
             {
                 Array.from({length: 16}).map((_, i) => (
                     <div key={i} style={{transition: `height 500ms ease-in-out ${i*100}ms`,
                         height: loaded ? '0' : '100%'
-                    }} className={`bg-black w-full border-r border-gray-600 ${!loaded ? 'border-b' : ''}`}/>
+                    }} className={`bg-white w-full border border-black`}/>
                     ))
             }
         </div>

@@ -1,23 +1,32 @@
 import '../App.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
 import {useMousePosition} from "../context/MousePositionProvider.jsx";
 import {BorderMarq, BorderMarqY} from "../helpers/BorderMarq.jsx";
 import {MovingBackground} from "../components/MovingBackground.jsx";
 import {Cursor} from "../components/Cursor.jsx";
+import {LoadAnim} from "../components/LoadAnim.jsx";
 
 
 export function Home() {
     const mousePos = useMousePosition();
     const {setLinkOver} = queryLinkOver()
+    const [loaded, setLoaded] = useState(false);
 
     const [yHalf, setYHalf] = useState(false)
     const [tHalf, setTHalf] = useState(false)
     const [bHalf, setBHalf] = useState(true)
 
+    useEffect(() => {
+        setTimeout(() => {
+            setLoaded(true);
+        }, 1000);
+    }, []);
+
     return (
         <div className="w-full bg-white h-full overflow-hidden">
             <Cursor/>
+            <LoadAnim loaded={loaded}/>
             <div className="w-full absolute bottom-0 h-12">
                 <BorderMarq displacement={-mousePos.x}/>
             </div>
