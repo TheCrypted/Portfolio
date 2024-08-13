@@ -1,6 +1,8 @@
-import React, { Suspense, useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import {BustModel} from "../models/BustModel.jsx";
+import {Text} from "@react-three/drei";
+import font from "../assets/fontA.ttf"
 
 export default function Bust({position, rotation}) {
     return (
