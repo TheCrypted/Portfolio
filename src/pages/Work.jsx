@@ -4,17 +4,37 @@ import Bust from "../components/Bust.jsx";
 import {LoadAnim} from "../components/LoadAnim.jsx";
 import {Text} from "@react-three/drei";
 import {useNavigate} from "react-router-dom";
+import icb from "../assets/icb.png"
 
 export const Work = () => {
     const mindiv = useRef(null);
     const [loaded, setLoaded] = useState(false);
     const [bustY, setBustY] = useState(0)
-    const prev = useRef(0)
     const navigate = useNavigate();
 
+
+
     useEffect(() => {
+        const handleScroll = () => {
+            const scrollY = mindiv.current.scrollTop;
+            const newPositions = [...positions];
+            const newVelocity = [...velocity];
+
+            // Physics calculations
+            newPositions.forEach((pos, index) => {
+                const force = scrollY - pos;
+                newVelocity[index] += force * 0.1; // Apply force
+                newVelocity[index] *= 0.8; // Apply friction
+                newPositions[index] += newVelocity[index];
+            });
+
+            setVelocity(newVelocity);
+            setPositions(newPositions);
+        };
+
         mindiv.current.addEventListener("scroll", () => {
             setBustY(mindiv.current.scrollTop/100)
+            handleScroll();
         })
         setTimeout(() => {
             setLoaded(true);
@@ -27,6 +47,10 @@ export const Work = () => {
             navigate(dest)
         }, 2000)
     }
+
+    const containerRef = useRef(null);
+    const [positions, setPositions] = useState([0, 0, 0]); // For storing div positions
+    const [velocity, setVelocity] = useState([0, 0, 0]);
 
     return (
         <>
@@ -55,6 +79,25 @@ export const Work = () => {
                         </div>
                         <div className="w-full h-auto pt-4 pl-14  italic">
                             Experience
+                        </div>
+                        <div className="container absolute w-1/3 h-1/2 right-0" ref={containerRef}>
+                            <div className="shadow-lg box w-full h-1/4 relative bg-white bg-opacity-20 flex items-center rounded-l-xl" style={{transform: `translateY(${positions[0]}px)`}}>
+                                <div style={{backgroundImage: `url("${icb}")`}} className="w-24 z-20 absolute h-24 bg-cover"/>
+                                <div className=" w-full h-full rounded-l-xl backdrop-blur-xl absolute z-30  text-5xl pl-8 flex items-center p-4 ">
+                                    Cadence
+                                </div>
+                            </div>
+
+                            <div
+                                className="box w-full h-1/4 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl"
+                                style={{transform: `translateY(${positions[1]}px)`}}>
+                                Cadence
+                            </div>
+                            <div
+                                className="box w-full h-1/4 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl"
+                                style={{transform: `translateY(${positions[2]}px)`}}>
+                                Cadence
+                            </div>
                         </div>
                     </div>
                 </div>

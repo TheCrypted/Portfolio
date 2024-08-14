@@ -58,4 +58,14 @@
   .animate-float-dif {
     animation: float-dif 3s ease-in-out infinite; /* Adjust the duration for speed */
   }
+
+  .container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .box {
+    margin: 20px auto;
+  }
 }
