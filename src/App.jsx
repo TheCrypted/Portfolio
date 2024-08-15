@@ -15,7 +15,7 @@ const router = createBrowserRouter(
             <Route path="/Test" element={<Background />}/>
             <Route path="/Work" element={<Work />}/>
         </>
-    )
+        ) ,  { basename: import.meta.env.BASE_URL }
 )
 
 function App() {
