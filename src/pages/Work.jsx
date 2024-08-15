@@ -5,6 +5,9 @@ import {LoadAnim} from "../components/LoadAnim.jsx";
 import {Text} from "@react-three/drei";
 import {useNavigate} from "react-router-dom";
 import icb from "../assets/icb.png"
+import {Canvas} from "@react-three/fiber";
+import {Stars} from "../components/Stars.jsx";
+import {ReactiveLink} from "../helpers/ReactiveLink.jsx";
 
 export const Work = () => {
     const mindiv = useRef(null);
@@ -15,26 +18,9 @@ export const Work = () => {
 
 
     useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = mindiv.current.scrollTop;
-            const newPositions = [...positions];
-            const newVelocity = [...velocity];
-
-            // Physics calculations
-            newPositions.forEach((pos, index) => {
-                const force = scrollY - pos;
-                newVelocity[index] += force * 0.1; // Apply force
-                newVelocity[index] *= 0.8; // Apply friction
-                newPositions[index] += newVelocity[index];
-            });
-
-            setVelocity(newVelocity);
-            setPositions(newPositions);
-        };
 
         mindiv.current.addEventListener("scroll", () => {
             setBustY(mindiv.current.scrollTop/100)
-            handleScroll();
         })
         setTimeout(() => {
             setLoaded(true);
@@ -49,23 +35,21 @@ export const Work = () => {
     }
 
     const containerRef = useRef(null);
-    const [positions, setPositions] = useState([0, 0, 0]); // For storing div positions
-    const [velocity, setVelocity] = useState([0, 0, 0]);
 
     return (
         <>
             <LoadAnim loaded={loaded}/>
             <div ref={mindiv} className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
-                <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_60%_10%]">
-                    <div onClick={() => changePage("/About")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
+                <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
+                    <div onClick={() => changePage("/")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
                     </div>
-                    <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
+                    <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
                     </div>
-                    <div onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
+                    <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
                     </div>
-                    <div className="absolute  right-0 w-1/5 h-full flex items-center justify-center pr-14">
-                        <div className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-full h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
+                    <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
+                        <div className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-auto px-3 h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
                             Website under active development
                         </div>
                     </div>
@@ -75,34 +59,50 @@ export const Work = () => {
                     <div className="top-0 w-full h-full text-white text-8xl font-serif absolute">
                         <div className="h-16 w-full "/>
                         <div className="w-full pt-12 pl-14 h-auto italic flex ">
-                            Work
+                            Projects
                         </div>
-                        <div className="w-full h-auto pt-4 pl-14  italic">
-                            Experience
+                        <div className="w-full h-auto pt-8 pl-28 italic">
+                            Competitions
                         </div>
                         <div className="container absolute w-1/3 h-1/2 right-0" ref={containerRef}>
-                            <div className="shadow-lg box w-full h-1/4 relative bg-white bg-opacity-20 flex items-center rounded-l-xl" style={{transform: `translateY(${positions[0]}px)`}}>
-                                <div style={{backgroundImage: `url("${icb}")`}} className="w-24 z-20 absolute h-24 bg-cover"/>
-                                <div className=" w-full h-full rounded-l-xl backdrop-blur-xl absolute z-30  text-5xl pl-8 flex items-center p-4 ">
-                                    Cadence
-                                </div>
-                            </div>
-
                             <div
-                                className="box w-full h-1/4 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl"
-                                style={{transform: `translateY(${positions[1]}px)`}}>
-                                Cadence
+                                className="box w-full h-1/5 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
+                                Ray Tracing Sim
                             </div>
                             <div
-                                className="box w-full h-1/4 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl"
-                                style={{transform: `translateY(${positions[2]}px)`}}>
-                                Cadence
+                                className="box w-full h-1/5 bg-white bg-opacity-15 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
+                                Calendar Plus
+                            </div>
+                            <div
+                                className="box w-full h-1/5 bg-white bg-opacity-10 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
+                                Sentiment Bot
+                            </div>
+                            <div
+                                className="box w-full h-1/5 bg-white bg-opacity-5 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
+                                Grocery Plus
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="w-full cursor-none h-full">
-
+                <div className="w-full relative rounded-t-3xl cursor-none bg-[#141137] h-[90%]">
+                    <Canvas camera={{ position: [0, 0, 1] }}>
+                        <Stars scroll={bustY} />
+                    </Canvas>
+                    <div className="absolute top-0 w-full h-full grid grid-cols-2 place-items-center">
+                        <div className="w-3/4 h-auto text-white gap-6 pb-12 flex flex-wrap font-serif text-4xl">
+                            <div className="w-full h-auto text-5xl">
+                                Ray Tracing Simulator
+                            </div>
+                            <div className="text-gray-400 flex justify-between text-3xl w-full italic">
+                                [C++, SDL] <ReactiveLink to="https://github.com/TheCrypted/RayTracing" classes="hover:underline animate-float">Github</ReactiveLink>
+                            </div>
+                            <div className="w-full text-justify text-3xl">
+                                A physics based renderer that simulates light interaction through ray tracing equations written from scratch.
+                                The renderer contains mathematical definitions for different materials, objects, textures and much more allowing one
+                                to build any combination of custom scenes.
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

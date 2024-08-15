@@ -15,6 +15,7 @@ import {LoadAnim} from "../components/LoadAnim.jsx";
 import {useMousePosition} from "../context/MousePositionProvider.jsx";
 import DateObject from "react-date-object";
 import {useNavigate} from "react-router-dom";
+import name_img from "../assets/name.png"
 
 function Model({ open, hinge, ...props }) {
     const group = useRef()
@@ -76,6 +77,7 @@ export const About = () => {
     const {setLinkOver} = queryLinkOver();
     const [expand, setExpand] = useState(null);
     const [loaded, setLoaded] = useState(false);
+    const [grad, setGrad] = useState(0)
     const mousePos = useMousePosition();
     const navigate = useNavigate();
 
@@ -92,6 +94,11 @@ export const About = () => {
         setTimeout(() => {
             setLoaded(true);
         }, 1000);
+        const interval = setInterval(() => setGrad(prev => (prev + 1) % 360), 100)
+
+        return () => {
+            clearInterval(interval);
+        }
     }, []);
 
     const changePage = (dest) => {
@@ -105,12 +112,18 @@ export const About = () => {
         <>
         <Cursor />
         <LoadAnim loaded={loaded}/>
-            <div className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_60%_10%]">
-                <div onClick={() => changePage("/")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME</div>
-                <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK</div>
-                <div onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS</div>
-                <div className="absolute  right-0 w-1/5 h-full flex items-center justify-center pr-14">
-                    <div className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-full h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
+            <div
+                className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
+                <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
+                </div>
+                <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
+                </div>
+                <div
+                    className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
+                </div>
+                <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
+                    <div
+                        className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-auto px-3 h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
                         Website under active development
                     </div>
                 </div>
@@ -118,13 +131,16 @@ export const About = () => {
             <div
                 className="relative overflow-x-hidden scrollbar overflow-y-scroll cursor-none w-full h-full bg-[#1d184f] text-5xl text-white">
                 <div className="w-full h-20"></div>
-                <div style={{backgroundImage: `url("../src/assets/name.png")`}} className="bg-no-repeat bg-contain bg-[center_top_1rem] relative w-full h-[90%]">
+                <div style={{backgroundImage: `url("${name_img}")`}}
+                     className="bg-no-repeat bg-contain bg-[center_top_1rem] relative w-full h-[90%]">
                     <div className={`w-full h-full absolute transition-all ${open ? "backdrop-blur-sm" : ""}`}>
                         <Canvas onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}
                                 dpr={[1, 2]} camera={{position: [0, 0, -30], fov: 35}}>
-                            <three.pointLight position={[10, 10, 10]} intensity={1.5} color={props.open.to([0, 1], ['#f0f0f0', '#d25578'])}/>
+                            <three.pointLight position={[10, 10, 10]} intensity={1.5}
+                                              color={props.open.to([0, 1], ['#f0f0f0', '#d25578'])}/>
                             <Suspense fallback={null}>
-                                <group rotation={[0, Math.PI, 0]} onClick={(e) => (e.stopPropagation(), setOpen(!open))}>
+                                <group rotation={[0, Math.PI, 0]}
+                                       onClick={(e) => (e.stopPropagation(), setOpen(!open))}>
                                     <Model open={open} hinge={props.open.to([0, 1], [1.575, -0.425])}/>
                                 </group>
                                 <Environment preset="city"/>
