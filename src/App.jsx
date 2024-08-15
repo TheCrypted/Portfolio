@@ -9,9 +9,9 @@ import {Work} from "./pages/Work.jsx";
 const router = createBrowserRouter(
     createRoutesFromElements(
         <>
-            <Route path="/" element={<Home />}/>
+            <Route path="/" element={<About />}/>
             <Route path="/Gallery" element={<Gallery />}/>
-            <Route path="/About" element={<About />}/>
+            <Route path="/About" element={<Home />}/>
             <Route path="/Test" element={<Background />}/>
             <Route path="/Work" element={<Work />}/>
         </>
