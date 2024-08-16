@@ -27,23 +27,23 @@ export const EdBack = () => {
     return (
         <div className="w-full relative flex flex-col h-full pl-14 pr-14">
             <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} ref={heightRef} className="w-full h-full opacity-50 hover:opacity-100 transition-opacity">
-                <div  style={{left: "600px", backgroundImage: `url("${ed}")`, width: heightRef.current?.clientHeight - 60 + "px", height: heightRef.current?.clientHeight - 60 + "px"}} className="bg-cover z-20  shadow-xl animate-float-dif pt-4 bg-center rounded-lg absolute bg-blue-400"/>
-                <div style={{left: "200px"}} className="w-2/3 top-8 h-auto animate-float absolute z-10 text-8xl">
+                <div  style={{left: window.innerWidth < 1400 ? "460px" : "600px", backgroundImage: `url("${ed}")`, width: heightRef.current?.clientHeight - 60 + "px", height: heightRef.current?.clientHeight - 60 + "px"}} className="bg-cover z-20  shadow-xl animate-float-dif pt-4 bg-center rounded-lg absolute bg-blue-400"/>
+                <div style={{left: window.innerWidth < 1400 ? "150px" : "200px"}} className="w-2/3 top-8 h-auto animate-float absolute z-10 text-7xl 2xl:text-8xl">
                     University
                 </div>
-                <div style={{left: "200px"}} className="w-auto h-auto top-40 animate-float absolute z-30 text-8xl ">
+                <div style={{left: window.innerWidth < 1400 ? "150px" : "200px"}} className="w-auto h-auto top-32 2xl:top-40 animate-float absolute z-30 text-7xl 2xl:text-8xl ">
                     of Edinburgh
                 </div>
-                <div style={{left: `${550 + heightRef.current?.clientHeight - 20}px`}} className="flex items-center flex-wrap pt-6 w-full h-1/2 relative pr-14">
+                <div style={{left: `${(window.innerWidth < 1400 ? 410 : 550) + heightRef.current?.clientHeight - 20}px`}} className="flex text-xl 2xl:text-2xl items-center flex-wrap pt-6 w-full h-1/2 relative pr-14">
                     <div
-                        className={`${hover ? "h-8" : "h-0"} mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        className={`${hover ? "h-8" : "h-0"} mb-1 2xl:mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
                         BEng(Hons.) Computer Science
                     </div>
-                    <div className={`${hover ? "h-8" : "h-0"} mb-2  w-full transition-all duration-700  overflow-hidden`}>
+                    <div className={`${hover ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-700  overflow-hidden`}>
                         <i>Penultimate Year Student</i>
                     </div>
                     <div
-                        className={`${hover ? "h-8" : "h-0"} mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        className={`${hover ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
                         Grade Classification: Expected First Class
                     </div>
                     <div
@@ -57,29 +57,29 @@ export const EdBack = () => {
             </div>
             <div onMouseEnter={handleMouseEnter2} onMouseLeave={handleMouseLeave2} className="w-full h-full relative opacity-50 hover:opacity-100 transition-opacity">
                 <div style={{
-                    left: "420px",
+                    left: window.innerWidth < 1400 ? "320px" : "420px",
                     backgroundImage: `url("${penn}")`,
                     width: heightRef.current?.clientHeight - 60 + "px",
                     height: heightRef.current?.clientHeight - 60 + "px"
                 }} className="bg-cover z-20 shadow-xl animate-float-dif pt-4 bg-center rounded-lg absolute bg-blue-400"/>
-                <div style={{left: "00px"}} className="w-2/3 top-16 h-full animate-float absolute z-10 text-8xl">
+                <div className="w-2/3 top-12 2xl:top-16 h-full animate-float absolute z-10 text-7xl 2xl:text-8xl">
                     University
                 </div>
-                <div style={{left: "00px"}} className="w-auto h-auto top-48 animate-float absolute z-30 text-8xl ">
+                <div className="w-auto h-auto top-36 2xl:top-48 animate-float absolute z-30 text-7xl 2xl:text-8xl ">
                     of Pennsylvania
                 </div>
-                <div style={{left: `${410 + heightRef.current?.clientHeight}px`}}
-                     className="flex items-center flex-wrap pt-6 w-full h-1/2 relative pr-14">
+                <div style={{left: `${(window.innerWidth < 1400 ? 310 : 410) + heightRef.current?.clientHeight}px`}}
+                     className="flex items-center text-xl 2xl:text-2xl flex-wrap pt-6 w-full h-1/2 relative pr-14">
                     <div
-                        className={`${hover2 ? "h-8" : "h-0"} mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        className={`${hover2 ? "h-8" : "h-0"} mb-1 2xl:mb-2 left-0 w-full transition-all duration-500 text-nowrap overflow-hidden`}>
                         BEng(Hons.) Computer Science
                     </div>
                     <div
-                        className={`${hover2 ? "h-8" : "h-0"} mb-2  w-full transition-all duration-700  overflow-hidden`}>
+                        className={`${hover2 ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-700  overflow-hidden`}>
                         <i>Academic Exchange</i>
                     </div>
                     <div
-                        className={`${hover2 ? "h-8" : "h-0"} mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
+                        className={`${hover2 ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
                         GPA: <i>Unreleased</i>
                     </div>
                     <div

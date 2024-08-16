@@ -30,7 +30,7 @@ function Model({ open, hinge, ...props }) {
         // Adjust the rotation to follow the mouse position slightly
         group.current.rotation.x = THREE.MathUtils.lerp(
             group.current.rotation.x,
-            open ? (Math.cos(t / 10) / 10 + 0.25 + pointer.y * 0.1) : 0,
+            open ? (Math.cos(t / 10) / 10 + 0.25 - pointer.y * 0.1) : 0,
             0.1
         );
         group.current.rotation.y = THREE.MathUtils.lerp(
@@ -152,7 +152,7 @@ export const About = () => {
                 <div style={{fontFamily: "Chamberi Super Display"}} className="w-full text-2xl text-white h-auto relative pl-14">
                     About <b className="text-blue-600">/</b>
                     <div className="w-full h-auto flex">
-                        <div className="w-1/2 text-white mt-6 mb-6 text-6xl">
+                        <div className="w-1/2 text-white mt-6 mb-6 text-5xl xl:text-6xl">
                             Full-stack developer studying at the University of Edinburgh. Building scalable,
                             user-friendly applications.
                         </div>
@@ -172,7 +172,7 @@ export const About = () => {
                         <ExpBlock ind={"03"} rot={12} z={1} role="Spring Insight">Mckinsey & Co</ExpBlock>
                     </div>
                 </div>
-                <div className="w-full "/>
+                <div className="w-full 2xl:h-0 h-16"/>
                 <div className="w-full h-full pt-6 pb-6 text-2xl font-serif text-white">
                     <div className="pl-14">
                         Background <b className="text-blue-600">/</b>
@@ -194,12 +194,12 @@ export const About = () => {
                 </div>
                 <div className="w-full h-20"/>
                 <div className="w-full h-1/2 pt-6 pb-6 text-2xl font-serif text-white">
-                    <div className="w-full h-auto text-8xl text-white text-nowrap overflow-hidden opacity-50">
+                    <div className="w-full h-auto text-7xl 2xl:text-8xl text-white text-nowrap overflow-hidden opacity-50">
                         <div style={{left: `${-500 + mousePos.x*0.2}px`}} className="relative">
                             Contact Me // Contact Me // Contact Me // Contact Me // Contact Me
                         </div>
                     </div>
-                    <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="w-full transition-colors h-auto text-8xl text-white text-nowrap overflow-hidden ">
+                    <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="w-full transition-colors h-auto text-7xl 2xl:text-8xl text-white text-nowrap overflow-hidden ">
                         <div style={{left: `${-500 - mousePos.x*0.2}px`}} className="relative">
                             Contact Me // Contact Me // Contact Me // Contact Me // Contact Me
                         </div>

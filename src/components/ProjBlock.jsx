@@ -23,11 +23,11 @@ export const ProjBlock = ({children, open, ind, setOpen}) => {
 
     return (
         <>
-        <div onMouseEnter={()=>setLinkOver(true)} onMouseLeave={()=>setLinkOver(false)} onClick={() => setOpen(ind === open ? null : ind)} className="w-auto border-l border-gray-400 px-4 hover:px-8 transition-all h-full [writing-mode:vertical-lr] text-7xl flex items-center justify-start text-white">
+        <div onMouseEnter={()=>setLinkOver(true)} onMouseLeave={()=>setLinkOver(false)} onClick={() => setOpen(ind === open ? null : ind)} className="w-auto border-l border-gray-400 px-4 hover:px-8 transition-all h-full [writing-mode:vertical-lr] text-6xl 2xl:text-7xl flex items-center justify-start text-white">
             {children}
         </div>
         <Collapse orientation="horizontal" in={open === ind} timeout="auto" unmountOnExit>
-            <div className="relative text-xl place-items-center items-center w-[700px] grid grid-cols-2 p-4 h-full">
+            <div className="relative text-lg  2xl:text-xl place-items-center items-center w-[600px] 2xl:w-[700px] grid grid-cols-2 p-4 h-full">
                 <div className="pr-8">
                     {desc_list[ind]}
                 </div>
