@@ -23,6 +23,10 @@ jobs:
       - name: Build project
         run: npm run build
 
+      # New step to create the CNAME file
+      - name: Create CNAME file
+        run: echo "amansharma.one" > ./dist/CNAME
+
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
@@ -47,3 +51,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
