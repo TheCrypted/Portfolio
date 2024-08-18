@@ -1,5 +1,5 @@
 import {Cursor} from "../components/Cursor.jsx";
-import React, {Suspense, useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Bust from "../components/Bust.jsx";
 import {LoadAnim} from "../components/LoadAnim.jsx";
 import {useNavigate} from "react-router-dom";
@@ -7,6 +7,10 @@ import {Canvas} from "@react-three/fiber";
 import {Stars} from "../components/Stars.jsx";
 import {ReactiveLink} from "../helpers/ReactiveLink.jsx";
 import {Diamond} from "../models/Diamond.jsx";
+import {Awards} from "../components/Awards.jsx";
+import im1 from "../assets/eufs.png"
+import im2 from "../assets/ada.png"
+import im3 from "../assets/hyp.png"
 
 export const Work = () => {
     const mindiv = useRef(null);
@@ -45,13 +49,11 @@ export const Work = () => {
     return (
         <>
             <LoadAnim loaded={loaded}/>
-            <div ref={mindiv}
-                 className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
+            <div ref={mindiv} className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
                 <div
                     className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
-                    <div onClick={() => changePage("/")}
-                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
+                    <div onClick={() => changePage("/")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
                     </div>
                     <div
                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
@@ -67,8 +69,7 @@ export const Work = () => {
                     </div>
                 </div>
                 <div className="w-full relative cursor-none h-full ">
-                    <Bust rotation={[0, bustY / 10 * Math.PI - 2.3, 0.4]}
-                          position={[bustY * 3 - 11, -3 - bustY / 20, bustY]}/>
+                    <Bust rotation={[0, bustY / 10 * Math.PI - 2.3, 0.4]} position={[bustY * 3 - 11, -3 - bustY / 20, bustY]}/>
                     <div className="top-0 w-full h-full text-white text-8xl font-serif absolute">
                         <div className="h-16 w-full "/>
                         <div className="w-full pt-12 pl-14 h-auto italic flex ">
@@ -77,22 +78,11 @@ export const Work = () => {
                         <div className="w-full h-auto pt-8 pl-28 italic">
                             Competitions
                         </div>
-                        <div className="container absolute w-1/3 h-1/2 right-0" ref={containerRef}>
-                            <div
-                                className="hover:[filter:blur(2px)] transition-all box w-full h-1/5 bg-white bg-opacity-20 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
-                                Ray Tracing Sim
-                            </div>
-                            <div
-                                className="hover:[filter:blur(2px)] transition-all box w-full h-1/5 bg-white bg-opacity-15 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
-                                Calendar Plus
-                            </div>
-                            <div
-                                className="hover:[filter:blur(2px)] transition-all box w-full h-1/5 bg-white bg-opacity-10 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
-                                Sentiment Bot
-                            </div>
-                            <div
-                                className="hover:[filter:blur(2px)] transition-all box w-full h-1/5 bg-white bg-opacity-5 backdrop-blur-xl shadow-lg text-5xl pl-8 flex items-center p-4 rounded-l-xl">
-                                Grocery Plus
+                        <div className="container absolute w-1/2 h-1/2 right-0 pt-16" ref={containerRef}>
+                            <div className="flex h-3/5 pt-8">
+                                <div style={{backgroundImage: `url("${im1}")`}} className="bg-center bg-cover left animate-float relative top-16"></div>
+                                <div style={{backgroundImage: `url("${im2}")`}} className="bg-center bg-cover middle animate-float-dif relative"></div>
+                                <div style={{backgroundImage: `url("${im3}")`}} className="bg-center bg-cover right animate-float relative top-16"></div>
                             </div>
                         </div>
                     </div>
@@ -112,20 +102,23 @@ export const Work = () => {
                             </div>
                             <div className="w-full text-justify text-3xl">
                                 A physics based renderer that simulates light interaction through ray tracing equations
-                                written from scratch.
-                                The renderer contains mathematical definitions for different materials, objects,
-                                textures and much more allowing one
+                                written from scratch. The renderer contains mathematical definitions for
+                                different materials, objects, textures and much more allowing one
                                 to build any combination of custom scenes.
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none bg-[#141137] h-[80%]">
+                <div className="w-full relative cursor-none bg-[#141137] h-[60%]">
                     <div className="w-full h-full rounded-t-3xl bg-[#110e2d]">
-
+                        <Awards/>
                     </div>
                 </div>
-
+                <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
+                    <div className="w-full h-full rounded-t-3xl bg-[#0e0c27]">
+                        {/*<Awards/>*/}
+                    </div>
+                </div>
             </div>
         </>
     )

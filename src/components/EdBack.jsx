@@ -1,7 +1,6 @@
 import {useRef, useState} from "react";
 import ed from "../assets/ed.png"
 import penn from "../assets/penn.png"
-import {ReactTyped} from "react-typed";
 
 export const EdBack = () => {
     const heightRef = useRef(null);

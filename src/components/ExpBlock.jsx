@@ -42,7 +42,7 @@ export const ExpBlock = ({children, role, ind, rot, z}) => {
                     <div style={{zIndex: 3 , backgroundImage: `url("${resources[parseInt(ind)]}")`, transform: `rotate(${rot}deg)`}} className={` animate-float bg-cover bg-no-repeat bg-center shadow-xl z-20 absolute ${hovering ? "right-52 xl:right-80" : "right-[-500px]"} w-80 h-80 rounded-2xl duration-1000 transition-all ${hovering ? "opacity-100" : "opacity-0"} rotate-${rot} bg-black shadow-x`}>
                 </div>
             </div>
-            <div style={{zIndex: z}} className={`w-full h-[0.5px] bg-white`}/>
+            <div style={{zIndex: z}} className={`w-full h-[1px] 2xl:h-[0.5px] bg-white`}/>
         </div>
     )
 }

@@ -1,0 +1,133 @@
+import React, { useRef } from 'react'
+import { useGLTF } from '@react-three/drei'
+import night_glb from "../assets/la_night_city.glb"
+
+export function Skyline(props) {
+    const { nodes, materials } = useGLTF(night_glb)
+    return (
+        <group {...props} dispose={null}>
+            <group rotation={[-Math.PI / 2, 0, 0]} scale={1.124}>
+                <group rotation={[Math.PI / 2, 0, 0]} scale={0.01}>
+                    <group rotation={[-Math.PI / 2, 0, -Math.PI / 2]} scale={100}>
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u3_v1_0.geometry}
+                            material={materials.Dtla_Orbit_u3_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u3_v1_0_1.geometry}
+                            material={materials.Dtla_Orbit_u3_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u3_v1_0_2.geometry}
+                            material={materials.Dtla_Orbit_u3_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u3_v1_0_3.geometry}
+                            material={materials.Dtla_Orbit_u3_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v1_0.geometry}
+                            material={materials.Dtla_Orbit_u1_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v1_0_1.geometry}
+                            material={materials.Dtla_Orbit_u1_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v1_0_2.geometry}
+                            material={materials.Dtla_Orbit_u1_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v2_0.geometry}
+                            material={materials.Dtla_Orbit_u2_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v2_0_1.geometry}
+                            material={materials.Dtla_Orbit_u2_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v2_0_2.geometry}
+                            material={materials.Dtla_Orbit_u2_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v2_0_3.geometry}
+                            material={materials.Dtla_Orbit_u2_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v1_0.geometry}
+                            material={materials.Dtla_Orbit_u2_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v1_0_1.geometry}
+                            material={materials.Dtla_Orbit_u2_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v1_0_2.geometry}
+                            material={materials.Dtla_Orbit_u2_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u2_v1_0_3.geometry}
+                            material={materials.Dtla_Orbit_u2_v1}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v2_0.geometry}
+                            material={materials.Dtla_Orbit_u1_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v2_0_1.geometry}
+                            material={materials.Dtla_Orbit_u1_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v2_0_2.geometry}
+                            material={materials.Dtla_Orbit_u1_v2}
+                        />
+                        <mesh
+                            castShadow
+                            receiveShadow
+                            geometry={nodes.Dtla_Orbit_Dtla_Orbit_u1_v2_0_3.geometry}
+                            material={materials.Dtla_Orbit_u1_v2}
+                        />
+                    </group>
+                </group>
+            </group>
+        </group>
+    )
+}
+
+useGLTF.preload('/la_night_city.glb')

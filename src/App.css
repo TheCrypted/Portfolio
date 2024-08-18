@@ -68,4 +68,19 @@
   .box {
     margin: 20px auto;
   }
+
+  .left {
+    flex: 1;
+    clip-path: polygon(30% 0%, 100% 0, 70% 100%, 0% 100%);
+  }
+
+  .middle {
+    flex: 1;
+    clip-path: polygon(30% 0, 90% 0, 70% 100%, 0% 100%);
+  }
+
+  .right {
+    flex: 1;
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+  }
 }
