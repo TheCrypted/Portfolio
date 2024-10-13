@@ -11,6 +11,8 @@ import {Awards} from "../components/Awards.jsx";
 import im1 from "../assets/eufs.png"
 import im2 from "../assets/ada.png"
 import im3 from "../assets/hyp.png"
+import {F1Car} from "../models/F1Car.jsx";
+import {useMousePosition} from "../context/MousePositionProvider.jsx";
 
 export const Work = () => {
     const mindiv = useRef(null);
@@ -18,7 +20,7 @@ export const Work = () => {
     const [bustY, setBustY] = useState(0)
     const navigate = useNavigate();
     const [diRot, setDiRot] = useState(0)
-
+    const mousePos = useMousePosition();
 
     useEffect(() => {
 
@@ -44,16 +46,24 @@ export const Work = () => {
         }, 2000)
     }
 
+    const convertMouseCoordinnatesTo3d = (mousepos) => {
+        const x = mousepos.x / window.innerWidth * 2 - 1;
+        const y = - mousepos.y / window.innerHeight * 2 + 1;
+        return [x, y, -4.0];
+    }
+
     const containerRef = useRef(null);
 
     return (
         <>
             <LoadAnim loaded={loaded}/>
-            <div ref={mindiv} className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
+            <div ref={mindiv}
+                 className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
                 <div
                     className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
-                    <div onClick={() => changePage("/")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
+                    <div onClick={() => changePage("/")}
+                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
                     </div>
                     <div
                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
@@ -69,7 +79,8 @@ export const Work = () => {
                     </div>
                 </div>
                 <div className="w-full relative cursor-none h-full ">
-                    <Bust rotation={[0, bustY / 10 * Math.PI - 2.3, 0.4]} position={[bustY * 3 - 11, -3 - bustY / 20, bustY]}/>
+                    <Bust rotation={[0, bustY / 10 * Math.PI - 2.3, 0.4]}
+                          position={[bustY * 3 - 11, -3 - bustY / 20, bustY]}/>
                     <div className="top-0 w-full h-full text-white text-8xl font-serif absolute">
                         <div className="h-16 w-full "/>
                         <div className="w-full pt-12 pl-14 h-auto italic flex ">
@@ -80,9 +91,12 @@ export const Work = () => {
                         </div>
                         <div className="container absolute w-1/2 h-1/2 right-0 pt-16" ref={containerRef}>
                             <div className="flex h-3/5 pt-8">
-                                <div style={{backgroundImage: `url("${im1}")`}} className="bg-center bg-cover left animate-float relative top-16"></div>
-                                <div style={{backgroundImage: `url("${im2}")`}} className="bg-center bg-cover middle animate-float-dif relative"></div>
-                                <div style={{backgroundImage: `url("${im3}")`}} className="bg-center bg-cover right animate-float relative top-16"></div>
+                                <div style={{backgroundImage: `url("${im1}")`}}
+                                     className="bg-center bg-cover left animate-float relative top-16"></div>
+                                <div style={{backgroundImage: `url("${im2}")`}}
+                                     className="bg-center bg-cover middle animate-float-dif relative"></div>
+                                <div style={{backgroundImage: `url("${im3}")`}}
+                                     className="bg-center bg-cover right animate-float relative top-16"></div>
                             </div>
                         </div>
                     </div>
@@ -98,7 +112,8 @@ export const Work = () => {
                                 Ray Tracing Simulator
                             </div>
                             <div className="text-gray-400 flex justify-between text-3xl w-full italic">
-                                [C++, SDL] <ReactiveLink to="https://github.com/TheCrypted/RayTracing" classes="hover:underline animate-float">Github</ReactiveLink>
+                                [C++, SDL] <ReactiveLink to="https://github.com/TheCrypted/RayTracing"
+                                                         classes="hover:underline animate-float">Github</ReactiveLink>
                             </div>
                             <div className="w-full text-justify text-3xl">
                                 A physics based renderer that simulates light interaction through ray tracing equations
@@ -110,13 +125,54 @@ export const Work = () => {
                     </div>
                 </div>
                 <div className="w-full relative cursor-none bg-[#141137] h-[60%]">
-                    <div className="w-full h-full rounded-t-3xl bg-[#110e2d]">
-                        <Awards/>
+                    <div className="w-full relative h-full rounded-t-3xl bg-[#110e2d] overflow-hidden">
+                        <Canvas camera={{position: [0, 0, 1]}}>
+                            <pointLight position={convertMouseCoordinnatesTo3d(mousePos)} intensity={10}/>
+                            <F1Car rotation={[Math.PI / 2, 0, 0]} position={[0.0, -1.0, -7.0]}/>
+                        </Canvas>
+                        <div className="absolute pl-14 top-0 w-full h-full flex justify-between">
+                            <div className="w-1/3 h-full flex items-center">
+                                <div>
+                                    <div
+                                        className="text-white flex items-end justify-center font-serif text-3xl mb-2">Edinburgh
+                                        University Formula Student
+                                    </div>
+                                    <div
+                                        className="text-gray-400 items-center flex justify-between text-2xl w-full italic mb-8">
+                                        [C++, ReactJS, NodeJS, Bash, ROS] <ReactiveLink to="https://www.eufs.co"
+                                                                                        classes="hover:underline">Website</ReactiveLink>
+                                    </div>
+                                    <div
+                                        className="opacity-70 hover:opacity-100 transition-opacity text-justify justify-center items-center text-white flex font-serif text-2xl">
+                                        Developed 3D simulation tech as part of a 5-person subteam in the 7x AI class
+                                        winning Formula Student UK team.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-1/3 h-full grid grid-cols-2"> <div className="w-full h-20 border-white border-opacity-40 border-r-4" /> </div>
+                            <div className="w-1/3 h-full flex items-center text-white hover:text-yellow-300">
+                                <div>
+                                    <div
+                                        className="text-white flex items-center mb-2 justify-center font-serif text-3xl">
+                                        Simulation Software Developer
+                                    </div>
+                                    <div
+                                        className="opacity-70 transition-all flex  text-justify justify-center font-serif text-xl">
+                                        Best Simulation Winner Formula Student UK 2024
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full h-full relative cursor-none bg-[#110e2d] h-[80%]">
+                    <div className="flex justify-end">
+                        <div className="w-1/2 h-20 border-b-4 border-white border-opacity-40 border-l-4 rounded-bl-3xl" />
                     </div>
                 </div>
                 <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
                     <div className="w-full h-full rounded-t-3xl bg-[#0e0c27]">
-                        {/*<Awards/>*/}
+                        <Awards/>
                     </div>
                 </div>
             </div>
