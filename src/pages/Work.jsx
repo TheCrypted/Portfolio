@@ -1,18 +1,41 @@
 import {Cursor} from "../components/Cursor.jsx";
 import {useEffect, useRef, useState} from "react";
-import Bust from "../components/Bust.jsx";
 import {LoadAnim} from "../components/LoadAnim.jsx";
 import {useNavigate} from "react-router-dom";
 import {Canvas} from "@react-three/fiber";
-import {Stars} from "../components/Stars.jsx";
 import {ReactiveLink} from "../helpers/ReactiveLink.jsx";
-import {Diamond} from "../models/Diamond.jsx";
-import {Awards} from "../components/Awards.jsx";
-import im1 from "../assets/eufs.png"
-import im2 from "../assets/ada.png"
-import im3 from "../assets/hyp.png"
+import me1 from "../assets/me1.png"
+import building1 from "../assets/building1.png"
+import building5 from "../assets/building5.png"
+import building4 from "../assets/building4.png"
+import building3 from "../assets/building3.png"
+import hyperloop from "../assets/hyperloop.png"
 import {F1Car} from "../models/F1Car.jsx";
 import {useMousePosition} from "../context/MousePositionProvider.jsx";
+import {Marquee} from "../components/Marquee.jsx";
+
+const ObserverComponent = ({ children }) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef();
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(ref.current); // Stop observing once in view
+                }
+            },
+            { threshold: 0.1 } // Adjust threshold as needed
+        );
+
+        if (ref.current) observer.observe(ref.current);
+
+        return () => observer.disconnect();
+    }, []);
+
+    return <div className="w-full h-full" ref={ref}>{isVisible ? children : null}</div>;
+};
 
 export const Work = () => {
     const mindiv = useRef(null);
@@ -21,6 +44,7 @@ export const Work = () => {
     const navigate = useNavigate();
     const [diRot, setDiRot] = useState(0)
     const mousePos = useMousePosition();
+    const track_arr = Array.from({length: 15}, (_, ind) => ind)
 
     useEffect(() => {
 
@@ -52,13 +76,11 @@ export const Work = () => {
         return [x, y, -4.0];
     }
 
-    const containerRef = useRef(null);
-
     return (
         <>
             <LoadAnim loaded={loaded}/>
             <div ref={mindiv}
-                 className="w-full cursor-none h-[120%] bg-[#1d184f] scrollbar overflow-x-hidden overflow-auto">
+                 className="w-full cursor-none h-[120%] bg-[#110e2d] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
                 <div
                     className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
@@ -68,7 +90,7 @@ export const Work = () => {
                     <div
                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
                     </div>
-                    <div
+                    <div onClick={() => changePage("/Projects")}
                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
                     </div>
                     <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
@@ -78,54 +100,31 @@ export const Work = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none h-full ">
-                    <Bust rotation={[0, bustY / 10 * Math.PI - 2.3, 0.4]}
-                          position={[bustY * 3 - 11, -3 - bustY / 20, bustY]}/>
-                    <div className="top-0 w-full h-full text-white text-8xl font-serif absolute">
-                        <div className="h-16 w-full "/>
-                        <div className="w-full pt-12 pl-14 h-auto italic flex ">
-                            Projects
+                <div className="w-full h-4/5 relative">
+                    <div
+                        className="w-full absolute cursor-none flex  justify-between flex-col h-full text-[#110e2d] text-6xl mb-8">
+                        {
+                            track_arr.map(item => (
+                                <Marquee key={item} className={`${item % 2 === 0 ? "-translate-x-36" : ""}`}>
+                                    WORK EXPERIENCE
+                                </Marquee>
+                            ))
+                        }
+                    </div>
+                    <div className="pointer-events-none w-full h-full absolute flex items-end justify-between">
+                        <div style={{backgroundImage: `url("${building4}")`, backgroundPosition: `left ${-5 + bustY/10}rem top 0rem`}} className="scale-x-[-1] grayscale w-1/4 h-4/5 flex items-end  bg-cover bg-center bg-no-repeat">
+                        <div style={{backgroundImage: `url("${building3}")`, backgroundPosition: `left ${-5 + bustY/2}rem top 0rem`}} className={`grayscale w-full h-3/4 bg-cover bg-no-repeat`}/>
                         </div>
-                        <div className="w-full h-auto pt-8 pl-28 italic">
-                            Competitions
-                        </div>
-                        <div className="container absolute w-1/2 h-1/2 right-0 pt-16" ref={containerRef}>
-                            <div className="flex h-3/5 pt-8">
-                                <div style={{backgroundImage: `url("${im1}")`}}
-                                     className="bg-center bg-cover left animate-float relative top-16"></div>
-                                <div style={{backgroundImage: `url("${im2}")`}}
-                                     className="bg-center bg-cover middle animate-float-dif relative"></div>
-                                <div style={{backgroundImage: `url("${im3}")`}}
-                                     className="bg-center bg-cover right animate-float relative top-16"></div>
-                            </div>
+                        <div style={{backgroundImage: `url("${me1}")`}} className="grayscale w-1/4 h-4/5 bg-cover bg-center bg-no-repeat"/>
+                        <div style={{backgroundImage: `url("${building5}")`, backgroundPosition: `right ${-8 - bustY/10}rem top 0rem`}} className="grayscale w-1/4 h-4/5 flex items-end bg-cover bg-center bg-no-repeat">
+                        <div style={{backgroundImage: `url("${building1}")`, backgroundPosition: `right ${-bustY/2}rem top 0rem`}} className="grayscale w-full h-2/3 bg-[right_0rem_top_0rem] bg-contain bg-no-repeat"/>
                         </div>
                     </div>
                 </div>
-                <div className="w-full relative rounded-t-3xl cursor-none bg-[#141137] h-[80%]">
-                    <Canvas camera={{position: [0, 0, 1]}}>
-                        <Stars scroll={bustY}/>
-                        <Diamond rotation={[0.0, diRot, bustY / 10]} position={[4.0, -0.5, -4.0]}/>
-                    </Canvas>
-                    <div className="absolute top-0 w-full h-full grid grid-cols-2 place-items-center">
-                        <div className="w-3/4 h-auto text-white gap-6 flex flex-wrap font-serif text-4xl">
-                            <div className="w-full h-auto text-5xl">
-                                Ray Tracing Simulator
-                            </div>
-                            <div className="text-gray-400 flex justify-between text-3xl w-full italic">
-                                [C++, SDL] <ReactiveLink to="https://github.com/TheCrypted/RayTracing"
-                                                         classes="hover:underline animate-float">Github</ReactiveLink>
-                            </div>
-                            <div className="w-full text-justify text-3xl">
-                                A physics based renderer that simulates light interaction through ray tracing equations
-                                written from scratch. The renderer contains mathematical definitions for
-                                different materials, objects, textures and much more allowing one
-                                to build any combination of custom scenes.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full relative cursor-none bg-[#141137] h-[60%]">
-                    <div className="w-full relative h-full rounded-t-3xl bg-[#110e2d] overflow-hidden">
+
+
+                <div className="w-full relative cursor-none h-[60%]">
+                    <div className="w-full relative h-full bg-[#110e2d] overflow-hidden">
                         <Canvas camera={{position: [0, 0, 1]}}>
                             <pointLight position={convertMouseCoordinnatesTo3d(mousePos)} intensity={10}/>
                             <F1Car rotation={[Math.PI / 2, 0, 0]} position={[0.0, -1.0, -7.0]}/>
@@ -138,7 +137,7 @@ export const Work = () => {
                                         University Formula Student
                                     </div>
                                     <div
-                                        className="text-gray-400 items-center flex justify-between text-2xl w-full italic mb-8">
+                                        className="text-gray-400 items-center flex justify-between text-2xl w-full font-serif italic mb-8">
                                         [C++, ReactJS, NodeJS, Bash, ROS] <ReactiveLink to="https://www.eufs.co"
                                                                                         classes="hover:underline">Website</ReactiveLink>
                                     </div>
@@ -149,7 +148,9 @@ export const Work = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-1/3 h-full grid grid-cols-2"> <div className="w-full h-20 border-white border-opacity-40 border-r-4" /> </div>
+                            <div className="w-1/3 h-full grid grid-cols-2">
+                                <div className="w-full h-20 border-white border-opacity-40 border-r-4"/>
+                            </div>
                             <div className="w-1/3 h-full flex items-center text-white hover:text-yellow-300">
                                 <div>
                                     <div
@@ -165,16 +166,40 @@ export const Work = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full h-full relative cursor-none bg-[#110e2d] h-[80%]">
+                <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
                     <div className="flex justify-end">
-                        <div className="w-1/2 h-20 border-b-4 border-white border-opacity-40 border-l-4 rounded-bl-3xl" />
+                        <div
+                            className="w-1/2 h-20 border-b-4 border-white border-opacity-40 border-l-4 rounded-bl-3xl"/>
+                    </div>
+                    <div className="absolute w-full h-full grid grid-rows-[30%_40%_30%]">
+                        <div
+                            className="w-full h-full flex items-end justify-between px-14 text-white font-serif text-3xl ">
+                            <div>Motors and Levitation Software Developer</div>
+                            <div className="opacity-70 italic">[C++]</div>
+
+                        </div>
+                        <ObserverComponent>
+                            <div className="w-full h-full flex items-center">
+                                <div style={{
+                                    backgroundImage: `url("${hyperloop}")`,
+                                    backgroundPosition: `center right ${bustY * 30}px`
+                                }} className="text-white flex items-center justify-center font-serif text-8xl w-[300%] h-full bg-center bg-contain bg-repeat-x">
+                                    <div className="mix-blend-difference">
+                                        Hyperloop Edinburgh
+                                    </div>
+                                </div>
+                            </div>
+                        </ObserverComponent>
+                        <div className="w-full h-full opacity-70 flex justify-center text-white text-3xl font-serif">
+                            Built a comprehensive testing suite and extended software to incorporate levitation based
+                            movement.
+                        </div>
                     </div>
                 </div>
                 <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
-                    <div className="w-full h-full rounded-t-3xl bg-[#0e0c27]">
-                        <Awards/>
-                    </div>
+
                 </div>
+
             </div>
         </>
     )

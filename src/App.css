@@ -83,4 +83,52 @@
     flex: 1;
     clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
   }
+
+  .box2 {
+    width: 100px;
+    height: 100px;
+    display:inline-block;
+    background-size: 200% 200%;
+    transition: background-position 0.3s;
+  }
+
+  .to-top{
+    background-image: linear-gradient(to top, rgba(255,255,255,0.8) 50%, rgba(0,0,0,0) 0);
+    background-position: top;
+  }
+
+  .to-top:hover {
+    background-position: bottom;
+  }
+
+  .to-bottom{
+    background-image: linear-gradient(to bottom, rgba(255,255,255,0.8) 50%, rgba(0,0,0,0) 0);
+    background-position: bottom;
+  }
+
+  .to-bottom:hover {
+    background-position: top;
+  }
+
+  .to-left{
+    background-image: linear-gradient(to left, rgba(255,255,255,0.8) 50%, rgba(0,0,0,0) 0);
+    background-position: left;
+  }
+
+  .to-left:hover {
+    background-position: right;
+  }
+
+  .to-right{
+    background-image: linear-gradient(to right, rgba(255,255,255,0.8) 50%, rgba(0,0,0,0) 0);
+    background-position: right;
+  }
+
+  .to-right:hover {
+    background-position: left;
+  }
+
+  .text-outline {
+    text-shadow: 0 0 1.5px rgba(255,255,255,0.4);
+  }
 }

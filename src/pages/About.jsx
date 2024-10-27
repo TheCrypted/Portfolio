@@ -119,7 +119,7 @@ export const About = () => {
                 <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
                 </div>
                 <div
-                    className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
+                    onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
                 </div>
                 <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
                     <div

@@ -5,6 +5,7 @@ import {Gallery} from "./pages/Gallery.jsx";
 import {About} from "./pages/About.jsx";
 import {Background} from "./pages/Background.jsx";
 import {Work} from "./pages/Work.jsx";
+import {Projects} from "./pages/Projects.jsx";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +15,7 @@ const router = createBrowserRouter(
             <Route path="/About" element={<Home />}/>
             <Route path="/Test" element={<Background />}/>
             <Route path="/Work" element={<Work />}/>
+            <Route path="/Projects" element={<Projects />}/>
         </>
         ) ,  { basename: import.meta.env.BASE_URL }
 )
