@@ -1,5 +1,5 @@
 import {Cursor} from "../components/Cursor.jsx";
-import {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {LoadAnim} from "../components/LoadAnim.jsx";
 import {useNavigate} from "react-router-dom";
 import {Canvas} from "@react-three/fiber";
@@ -13,6 +13,9 @@ import hyperloop from "../assets/hyperloop.png"
 import {F1Car} from "../models/F1Car.jsx";
 import {useMousePosition} from "../context/MousePositionProvider.jsx";
 import {Marquee} from "../components/Marquee.jsx";
+import DateObject from "react-date-object";
+import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
+import {Market} from "../components/Market.jsx";
 
 const ObserverComponent = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -45,6 +48,16 @@ export const Work = () => {
     const [diRot, setDiRot] = useState(0)
     const mousePos = useMousePosition();
     const track_arr = Array.from({length: 15}, (_, ind) => ind)
+    const {setLinkOver} = queryLinkOver();
+
+    const date = new DateObject({
+        date: new Date(),
+        format: "DD MMMM YYYY",
+    });
+    const time = new DateObject({
+        date: new Date(),
+        format: "HHMM",
+    });
 
     useEffect(() => {
 
@@ -91,7 +104,7 @@ export const Work = () => {
                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
                     </div>
                     <div onClick={() => changePage("/Projects")}
-                        className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
+                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
                     </div>
                     <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
                         <div
@@ -105,19 +118,34 @@ export const Work = () => {
                         className="w-full absolute cursor-none flex  justify-between flex-col h-full text-[#110e2d] text-6xl mb-8">
                         {
                             track_arr.map(item => (
-                                <Marquee key={item} className={`${item % 2 === 0 ? "-translate-x-36" : ""}`}>
+                                <Marquee key={item}
+                                         className={`select-none ${item % 2 === 0 ? "-translate-x-36" : ""}`}>
                                     WORK EXPERIENCE
                                 </Marquee>
                             ))
                         }
                     </div>
                     <div className="pointer-events-none w-full h-full absolute flex items-end justify-between">
-                        <div style={{backgroundImage: `url("${building4}")`, backgroundPosition: `left ${-5 + bustY/10}rem top 0rem`}} className="scale-x-[-1] grayscale w-1/4 h-4/5 flex items-end  bg-cover bg-center bg-no-repeat">
-                        <div style={{backgroundImage: `url("${building3}")`, backgroundPosition: `left ${-5 + bustY/2}rem top 0rem`}} className={`grayscale w-full h-3/4 bg-cover bg-no-repeat`}/>
+                        <div style={{
+                            backgroundImage: `url("${building4}")`,
+                            backgroundPosition: `left ${-5 + bustY / 10}rem top 0rem`
+                        }}
+                             className="scale-x-[-1] grayscale w-1/4 h-4/5 flex items-end  bg-cover bg-center bg-no-repeat">
+                            <div style={{
+                                backgroundImage: `url("${building3}")`,
+                                backgroundPosition: `left ${-5 + bustY / 2}rem top 0rem`
+                            }} className={`grayscale w-full h-3/4 bg-cover bg-no-repeat`}/>
                         </div>
-                        <div style={{backgroundImage: `url("${me1}")`}} className="grayscale w-1/4 h-4/5 bg-cover bg-center bg-no-repeat"/>
-                        <div style={{backgroundImage: `url("${building5}")`, backgroundPosition: `right ${-8 - bustY/10}rem top 0rem`}} className="grayscale w-1/4 h-4/5 flex items-end bg-cover bg-center bg-no-repeat">
-                        <div style={{backgroundImage: `url("${building1}")`, backgroundPosition: `right ${-bustY/2}rem top 0rem`}} className="grayscale w-full h-2/3 bg-[right_0rem_top_0rem] bg-contain bg-no-repeat"/>
+                        <div style={{backgroundImage: `url("${me1}")`}}
+                             className="grayscale w-1/4 h-4/5 bg-cover bg-center bg-no-repeat"/>
+                        <div style={{
+                            backgroundImage: `url("${building5}")`,
+                            backgroundPosition: `right ${-8 - bustY / 10}rem top 0rem`
+                        }} className="grayscale w-1/4 h-4/5 flex items-end bg-cover bg-center bg-no-repeat">
+                            <div style={{
+                                backgroundImage: `url("${building1}")`,
+                                backgroundPosition: `right ${-bustY / 2}rem top 0rem`
+                            }} className="grayscale w-full h-2/3 bg-[right_0rem_top_0rem] bg-contain bg-no-repeat"/>
                         </div>
                     </div>
                 </div>
@@ -183,7 +211,8 @@ export const Work = () => {
                                 <div style={{
                                     backgroundImage: `url("${hyperloop}")`,
                                     backgroundPosition: `center right ${bustY * 30}px`
-                                }} className="text-white flex items-center justify-center font-serif text-8xl w-[300%] h-full bg-center bg-contain bg-repeat-x">
+                                }}
+                                     className="text-white flex items-center justify-center font-serif text-8xl w-[300%] h-full bg-center bg-contain bg-repeat-x">
                                     <div className="mix-blend-difference">
                                         Hyperloop Edinburgh
                                     </div>
@@ -196,10 +225,37 @@ export const Work = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
-
+                <div className="w-full h-40" />
+                <div className="w-full relative cursor-none bg-[#110e2d] h-[60%]">
+                    <Market />
                 </div>
-
+                <div
+                    className="w-full relative grid grid-cols-[20%_60%_20%] h-[20%] pt-6 pb-6 bg-opacity-40 text-2xl font-serif text-white"> {/*  bg-[#191443]*/}
+                    <div className="text-sm pl-14 flex items-center ">
+                        <div>
+                            <div>Aman Sharma</div>
+                            <div><i>{date.format()}</i></div>
+                            <div>{time.format()} &nbsp; hrs</div>
+                        </div>
+                    </div>
+                    <div></div>
+                    <div className="pr-14 flex text-right items-center text-sm justify-end">
+                        <div>
+                            <a href="https://www.linkedin.com/in/aman-sharma-992a6a285/"
+                               onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}>
+                                <div className="transition-all hover:[filter:blur(1px)]">LinkedIn</div>
+                            </a>
+                            <a href="https://github.com/TheCrypted" onMouseEnter={() => setLinkOver(true)}
+                               onMouseLeave={() => setLinkOver(false)}>
+                                <div className="transition-all hover:[filter:blur(1px)]">Github</div>
+                            </a>
+                            <a href="https://www.kaggle.com/amansharma110" onMouseEnter={() => setLinkOver(true)}
+                               onMouseLeave={() => setLinkOver(false)}>
+                                <div className="transition-all hover:[filter:blur(1px)]">Kaggle</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     )

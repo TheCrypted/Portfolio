@@ -27,7 +27,6 @@ function Model({ open, hinge, ...props }) {
         const t = state.clock.getElapsedTime()
         const { pointer } = state;
 
-        // Adjust the rotation to follow the mouse position slightly
         group.current.rotation.x = THREE.MathUtils.lerp(
             group.current.rotation.x,
             open ? (Math.cos(t / 10) / 10 + 0.25 - pointer.y * 0.1) : 0,
