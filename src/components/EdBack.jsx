@@ -79,14 +79,14 @@ export const EdBack = () => {
                     </div>
                     <div
                         className={`${hover2 ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
-                        GPA: <i>Unreleased</i>
+                        GPA: <i>3.81</i>
                     </div>
                     <div
-                        className={`${hover2 ? "h-24" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>
-                        Relevant Modules: FinTech, Database and Information <br/>
-                        Systems, Computer and Network Security, Natural Language Processing, <br />
-                        Applied Machine Learning, Compilers and Interpreters,<br/>
-                        Computer Operating Systems
+                        className={`${hover2 ? "h-32" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>
+                        Relevant Modules: Database and Information Systems, Computer and Network Security, <br/>
+                        Distributed Systems, Decision Processes, Statistical Computing, Applied Machine Learning, Operating Systems, <br/>
+                        Compilers and Interpreters, Computer Architecture and Design, <br/>
+                        Numerical Optimization for Data Science and Machine Learning
                     </div>
                 </div>
             </div>

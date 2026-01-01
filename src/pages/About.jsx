@@ -113,12 +113,12 @@ export const About = () => {
         <LoadAnim loaded={loaded}/>
             <div
                 className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
-                <div className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
+                <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
                 </div>
-                <div onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
+                <div onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} onClick={() => changePage("/Work")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
                 </div>
                 <div
-                    onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
+                    onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)} onClick={() => changePage("/Projects")} className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
                 </div>
                 <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
                     <div
@@ -164,14 +164,13 @@ export const About = () => {
                 <div className="w-full h-full pt-6 pb-6 text-2xl font-serif pl-14 pr-14 text-white">
                     Work Experience <b className="text-blue-600">/</b>
                     <div className="w-full overflow-hidden h-auto">
-                        <ExpBlock ind={"00"} rot={-8} z={4} role="Spring Insight">Morgan Stanley</ExpBlock>
+                        <ExpBlock ind={"00"} rot={-8} z={4} role="Software Engineer Intern">Bloomberg</ExpBlock>
                         <ExpBlock ind={"01"} rot={7} z={1} role="Software Engineering Intern">Cadence</ExpBlock>
                         <ExpBlock ind={"02"} rot={-10} z={4} role="Simulation Software Engineer">Formula
                             Student</ExpBlock>
-                        <ExpBlock ind={"03"} rot={12} z={1} role="Spring Insight">Mckinsey & Co</ExpBlock>
                     </div>
                 </div>
-                <div className="w-full 2xl:h-0 h-16"/>
+                <div className="w-full 2xl:h-0 h-8"/>
                 <div className="w-full h-full pt-6 pb-6 text-2xl font-serif text-white">
                     <div className="pl-14">
                         Background <b className="text-blue-600">/</b>
@@ -189,6 +188,8 @@ export const About = () => {
                         <ProjBlock open={expand} setOpen={setExpand} ind={2}>Web Chat +</ProjBlock>
                         <ProjBlock open={expand} setOpen={setExpand} ind={3}>Ray Tracer</ProjBlock>
                         <ProjBlock open={expand} setOpen={setExpand} ind={4}>Plant Guard</ProjBlock>
+                        <ProjBlock open={expand} setOpen={setExpand} ind={5}>FinWiz +</ProjBlock>
+                        <ProjBlock open={expand} setOpen={setExpand} ind={6}>Search Engine  </ProjBlock>
                     </div>
                 </div>
                 <div className="w-full h-20"/>

@@ -5,6 +5,7 @@ import im1 from "../assets/img_s.gif"
 import im2 from "../assets/img_b.gif"
 import im3 from "../assets/img_m.gif"
 import im4 from "../assets/img_d.gif"
+import bloomberg from "../assets/bloomberg.png"
 
 const icon = (
     <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={4}>
@@ -25,7 +26,7 @@ const icon = (
 
 export const ExpBlock = ({children, role, ind, rot, z}) => {
     const [hovering, setHovering] = useState(false);
-    const resources = [im4, im2, im1, im3]
+    const resources = [bloomberg, im2, im1, im3]
 
     return (
         <div className="w-full h-40 overflow-hidden flex flex-col">

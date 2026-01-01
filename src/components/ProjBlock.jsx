@@ -4,9 +4,11 @@ import cal from "../assets/cal.png"
 import web_p from "../assets/web_p.png"
 import groc from "../assets/groc.png"
 import plant from "../assets/plant.png"
+import finwiz from "../assets/Finwiz.png"
+import dse from "../assets/dse.png"
 import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
 
-const list = [cal, groc, web_p, rayT, plant]
+const list = [cal, groc, web_p, rayT, plant, finwiz, dse]
 const desc_list = [
     "A Calendar web app that provides lots of extra utility in the form of inbuilt Event creation/Booking that blends in directly with your schedule, email reminders for important events, automatic scheduling and much more. Full stack application built from scratch.",
     "A Full-stack application that finds and compares grocery prices in all major stores around you and displays them in the form of an interactive user interface that helps make buying groceries much more efficient. Web app also comes equipped with in app grocery lists aswell as email reminders for shopping trips.",
@@ -15,7 +17,9 @@ const desc_list = [
     "                scratch. The renderer also contains mathematical definitions for different materials, objects, textures\n" +
     "                and much more allowing one to build any combination of custom scenes and uses SDL to display the\n" +
     "                computation results.",
-    "PlantGuardian uses image recognition and machine learning to detect plant diseases, alert farmers about pest infestations, suggest recipes based on vegetable photos, and visualize disease trends on a map for preventive measures."
+    "PlantGuardian uses image recognition and machine learning to detect plant diseases, alert farmers about pest infestations, suggest recipes based on vegetable photos, and visualize disease trends on a map for preventive measures.",
+    "Financial analytics platform integrating global economic and stock market data from World Bank, IMF, and UN sources. Features interactive heatmaps, dynamic graphs, and portfolio simulation. Built with React-Globe.gl and Recharts, with scalable backend on EC2 and PostgreSQL on AWS RDS.",
+    "Distributed search engine system capable of crawling, indexing, and ranking websites. Implemented crawler, indexer, TF-IDF scoring, and PageRank algorithms, processing up to 200,000 documents. Built with custom server libraries and Apache Spark imitations, deployed on AWS EC2 with distributed computing across 5+ nodes."
 ]
 
 export const ProjBlock = ({children, open, ind, setOpen}) => {
