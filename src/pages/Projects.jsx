@@ -9,9 +9,13 @@ import rayT from "../assets/ray_tracer.png"
 import cal from "../assets/cal.png"
 import web_p from "../assets/web_p.png"
 import groc from "../assets/groc.png"
-import plant from "../assets/plant.png"
+import htb from "../assets/htb.png"
 import finwiz from "../assets/Finwiz.png"
 import dse from "../assets/dse.png"
+import os from "../assets/os.png"
+import fpga from "../assets/fpga.png"
+import htb2 from "../assets/htb2.png"
+import ada from "../assets/ada.png"
 
 /*
  * PROJECT CONFIGURATION
@@ -22,13 +26,94 @@ import dse from "../assets/dse.png"
  */
 
 const projects = [
-    { name: "Calendar +", image: cal, tech: "React, Node.js, MongoDB" },
-    { name: "Grocery +", image: groc, tech: "React, Express, PostgreSQL" },
-    { name: "Web Chat +", image: web_p, tech: "Socket.io, React, Node.js" },
-    { name: "Ray Tracer", image: rayT, tech: "C++, SDL" },
-    { name: "Plant Guard", image: plant, tech: "Python, TensorFlow, React" },
-    { name: "FinWiz", image: finwiz, tech: "React, AWS, PostgreSQL" },
-    { name: "Search Engine", image: dse, tech: "Java, Spark, AWS" },
+    { 
+        name: "Hack-The-Burgh II", 
+        image: htb2, 
+        tech: "MERN, TensorFlow",
+        client: "Hackathon",
+        tools: ["MongoDB", "Express", "React", "Node.js"],
+        skills: ["MERN Stack", "TensorFlow", "AI", "Full-Stack"],
+    },
+    { 
+        name: "PennOS", 
+        image: os, 
+        tech: "C++, Unix",
+        client: "University Project",
+        tools: ["GCC", "GDB", "Valgrind"],
+        skills: ["C++", "Operating Systems", "Unix", "Systems Programming"],
+    },
+    { 
+        name: "RISCV Processor", 
+        image: fpga, 
+        tech: "SystemVerilog, FPGA",
+        client: "University Project",
+        tools: ["Vivado", "ModelSim"],
+        skills: ["SystemVerilog", "FPGA", "Digital Design", "Computer Architecture"],
+    },
+    { 
+        name: "Hack-The-Burgh", 
+        image: htb, 
+        tech: "Hackathon Project",
+        client: "Hackathon",
+        tools: ["Python", "TensorFlow"],
+        skills: ["Python", "ML", "Hackathon"],
+    },
+    { 
+        name: "AdaHack", 
+        image: ada, 
+        tech: "MERN Stack",
+        client: "Hackathon",
+        tools: ["MongoDB", "Express", "React", "Node.js"],
+        skills: ["MERN Stack", "Full-Stack", "Hackathon"],
+    },
+    { 
+        name: "Calendar +", 
+        image: cal, 
+        tech: "React, Node.js, MongoDB",
+        client: "Personal Project",
+        tools: ["Figma", "VS Code"],
+        skills: ["React", "Node.js", "MongoDB", "REST API"],
+    },
+    { 
+        name: "Grocery +", 
+        image: groc, 
+        tech: "React, Express, PostgreSQL",
+        client: "Personal Project",
+        tools: ["Figma", "PostgreSQL"],
+        skills: ["React", "Express", "PostgreSQL", "Docker"],
+    },
+    { 
+        name: "Web Chat +", 
+        image: web_p, 
+        tech: "Socket.io, React, Node.js",
+        client: "Personal Project",
+        tools: ["Socket.io", "Redis"],
+        skills: ["WebSockets", "React", "Node.js", "Redis"],
+    },
+    { 
+        name: "Ray Tracer", 
+        image: rayT, 
+        tech: "C++, SDL",
+        client: "University Project",
+        tools: ["CLion", "SDL2"],
+        skills: ["C++", "Linear Algebra", "Ray Tracing", "SDL"],
+    },
+    { 
+        name: "FinWiz", 
+        image: finwiz, 
+        tech: "React, AWS, PostgreSQL",
+        client: "Personal Project",
+        tools: ["AWS", "Terraform"],
+        skills: ["React", "AWS Lambda", "PostgreSQL", "D3.js"],
+    },
+    { 
+        name: "Search Engine", 
+        image: dse, 
+        tech: "Java, Spark, AWS",
+        client: "University Project",
+        tools: ["Apache Spark", "AWS EMR"],
+        skills: ["Java", "Spark", "MapReduce", "AWS"],
+    },
 ];
 
 export const Projects = () => {
@@ -204,7 +289,7 @@ export const Projects = () => {
     return (
         <>
             <LoadAnim loaded={loaded}/>
-            <div className="w-full cursor-none h-full bg-[#0a0a0a] overflow-hidden">
+            <div className="w-full cursor-none h-full bg-[#1e1e4a] overflow-hidden">
                 {/* Cursor with higher z-index */}
                 <div className="fixed inset-0 z-[100] pointer-events-none">
                     <Cursor/>
@@ -212,7 +297,7 @@ export const Projects = () => {
                 
                 {/* Header - hides on scroll */}
                 <div
-                    className={`cursor-none fixed z-50 top-0 w-full h-16 bg-[#0a0a0a] bg-opacity-80 backdrop-blur-xl border-b border-gray-800 pl-14 grid grid-cols-[5%_5%_5%_30%_55%] transition-transform duration-500 ${
+                    className={`cursor-none fixed z-50 top-0 w-full h-16 bg-[#1e1e4a] bg-opacity-80 backdrop-blur-xl border-b border-white/10 pl-14 grid grid-cols-[5%_5%_5%_30%_55%] transition-transform duration-500 ${
                         headerVisible ? 'translate-y-0' : '-translate-y-full'
                     }`}
                 >
@@ -243,6 +328,47 @@ export const Projects = () => {
                         <div
                             className="bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-auto px-3 h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
                             Website under active development
+                        </div>
+                    </div>
+                </div>
+
+                {/* Project Info Card - Left side */}
+                <div 
+                    className="fixed left-0 top-1/2 -translate-y-1/2 z-40 w-72 p-6"
+                    style={{
+                        backgroundColor: '#1e1e4a',
+                        opacity: loaded ? 1 : 0,
+                        transform: `translateY(-50%) translateX(${loaded ? '0' : '-100%'})`,
+                        transition: 'opacity 0.5s, transform 0.5s',
+                    }}
+                >
+                    <div className="font-serif">
+                        {/* Client section - fixed height */}
+                        <div className="border-b border-white/30 h-16 flex flex-col justify-center">
+                            <div className="text-gray-400 text-xs font-medium tracking-wider mb-1">Client</div>
+                            <div className="text-white truncate">
+                                {projects[activeIndex]?.client}
+                            </div>
+                        </div>
+                        
+                        {/* Tool section - fixed height */}
+                        <div className="border-b border-white/30 h-16 flex flex-col justify-center">
+                            <div className="text-gray-400 text-xs font-medium tracking-wider mb-1">Tool</div>
+                            <div className="text-white flex gap-3 overflow-hidden">
+                                {projects[activeIndex]?.tools.map((t, i) => (
+                                    <span key={i}>{t}</span>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        {/* Skill section - fixed height */}
+                        <div className="h-20 flex flex-col justify-center">
+                            <div className="text-gray-400 text-xs font-medium tracking-wider mb-1">Skill</div>
+                            <div className="text-white flex flex-wrap gap-x-3 gap-y-1 overflow-hidden">
+                                {projects[activeIndex]?.skills.map((s, i) => (
+                                    <span key={i}>{s}</span>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -283,9 +409,10 @@ export const Projects = () => {
                             const isVisible = Math.abs(angle) < 70;
                             const isCentered = Math.abs(offset) < 0.5;
                             
-                            // Opacity - smooth fade based on angle
+                            // Opacity - centered images more visible, non-centered much more transparent
                             const normalizedAngle = Math.abs(angle) / 70;
-                            const opacity = isVisible ? Math.max(0, 0.55 * (1 - normalizedAngle * 0.8)) : 0;
+                            const baseOpacity = isCentered ? 0.65 : 0.08;
+                            const opacity = isVisible ? Math.max(0, baseOpacity * (1 - normalizedAngle * 0.7)) : 0;
                             
                             // Scale - larger when centered
                             const scale = 0.7 + (1 - Math.min(1, Math.abs(offset) * 0.5)) * 0.35;
@@ -295,7 +422,7 @@ export const Projects = () => {
                             return (
                                 <div
                                     key={`image-${index}`}
-                                    className="absolute left-1/2 top-1/2 w-full"
+                                    className="absolute left-1/2 top-1/2 w-full flex justify-center"
                                     style={{
                                         transform: `translateX(-50%) translateY(-50%) translateY(${y}px) translateZ(${z}px) rotateX(${-angle}deg) scale(${scale})`,
                                         opacity: opacity,
@@ -309,9 +436,10 @@ export const Projects = () => {
                                     <img 
                                         src={project.image} 
                                         alt={project.name}
-                                        className="w-full h-auto rounded-xl shadow-2xl"
+                                        className="h-auto rounded-xl"
                                         style={{
-                                            maxHeight: '50vh',
+                                            maxHeight: '65vh',
+                                            minWidth: '400px',
                                             objectFit: 'contain',
                                             filter: isCentered ? 'none' : 'brightness(0.7)',
                                         }}
@@ -358,7 +486,7 @@ export const Projects = () => {
                                     }}
                                 >
                                     <div 
-                                        className="font-serif text-6xl md:text-8xl lg:text-9xl font-bold whitespace-nowrap tracking-tighter text-center"
+                                        className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold whitespace-nowrap tracking-tighter text-center"
                                         onMouseEnter={() => setLinkOver(true)} 
                                         onMouseLeave={() => setLinkOver(false)}
                                         style={{ 
@@ -369,16 +497,6 @@ export const Projects = () => {
                                         }}
                                     >
                                         {project.name}
-                                    </div>
-                                    <div 
-                                        className="text-lg md:text-xl lg:text-2xl mt-6 font-mono tracking-wider"
-                                        style={{ 
-                                            backfaceVisibility: 'hidden',
-                                            color: isFocused ? 'rgb(156, 163, 175)' : 'rgb(45, 45, 45)',
-                                            transition: 'color 0.4s ease-out',
-                                        }}
-                                    >
-                                        {project.tech}
                                     </div>
                                 </div>
                             );

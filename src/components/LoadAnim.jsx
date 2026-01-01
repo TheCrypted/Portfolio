@@ -14,7 +14,7 @@ export const LoadAnim = ({loaded}) => {
     }, [loaded])
 
     return (
-        <div style={{zIndex: display ? "" : "-100"}} className={`w-full h-full ${display ? "opacity-100" : "opacity-0"} cursor-none absolute z-50 flex`}>
+        <div style={{zIndex: display ? "90" : "-100"}} className={`w-full h-full ${display ? "opacity-100" : "opacity-0"} cursor-none fixed inset-0 flex`}>
             {
                 Array.from({length: 16}).map((_, i) => (
                     <div key={i} style={{transition: `height 500ms ease-in-out ${i*100}ms`,
