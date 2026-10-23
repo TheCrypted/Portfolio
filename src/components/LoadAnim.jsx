@@ -1,27 +1,43 @@
-import {useEffect, useState} from "react";
+import {useEffect, useId, useLayoutEffect, useState} from "react";
+import PropTypes from "prop-types";
+import {useLoading} from "../context/LoadingProvider.jsx";
+
+const REVEAL_DURATION = 2000;
 
 export const LoadAnim = ({loaded}) => {
-    const [display, setDisplay] = useState(true)
+    const [display, setDisplay] = useState(true);
+    const id = useId();
+    const {setLoading} = useLoading();
+    const visible = !loaded || display;
 
     useEffect(() => {
-        if(loaded){
-            setTimeout(() => {
-                setDisplay(false);
-            }, 2000)
-        } else {
+        if (!loaded) {
             setDisplay(true);
+            return;
         }
-    }, [loaded])
+        const timeout = setTimeout(() => setDisplay(false), REVEAL_DURATION);
+        return () => clearTimeout(timeout);
+    }, [loaded]);
+
+    useLayoutEffect(() => {
+        setLoading(id, visible);
+        return () => setLoading(id, false);
+    }, [id, setLoading, visible]);
 
     return (
-        <div style={{zIndex: display ? "90" : "-100"}} className={`w-full h-full ${display ? "opacity-100" : "opacity-0"} cursor-none fixed inset-0 flex`}>
-            {
-                Array.from({length: 16}).map((_, i) => (
-                    <div key={i} style={{transition: `height 500ms ease-in-out ${i*100}ms`,
-                        height: loaded ? '0' : '100%'
-                    }} className={`bg-white w-full border border-black`}/>
-                    ))
-            }
+        <div
+            aria-hidden="true"
+            style={{zIndex: visible ? 1000 : -100, pointerEvents: visible ? "auto" : "none"}}
+            className={`w-full h-full ${visible ? "opacity-100" : "opacity-0"} cursor-none fixed inset-0 flex`}
+        >
+            {Array.from({length: 16}).map((_, i) => (
+                <div key={i} style={{
+                    transition: `height 500ms ease-in-out ${i * 100}ms`,
+                    height: loaded ? '0' : '100%',
+                }} className="bg-white w-full border border-black"/>
+            ))}
         </div>
-    )
-}
+    );
+};
+
+LoadAnim.propTypes = {loaded: PropTypes.bool.isRequired};

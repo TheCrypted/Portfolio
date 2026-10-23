@@ -39,11 +39,11 @@ export const EdBack = () => {
                         BEng(Hons.) Computer Science
                     </div>
                     <div className={`${hover ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-700  overflow-hidden`}>
-                        <i>Penultimate Year Student</i>
+                        <i>Graduated June 2026</i>
                     </div>
                     <div
                         className={`${hover ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
-                        Grade Classification: Expected First Class
+                        Grade Classification: First Class
                     </div>
                     <div
                         className={`${hover ? "h-24" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>
@@ -79,7 +79,7 @@ export const EdBack = () => {
                     </div>
                     <div
                         className={`${hover2 ? "h-8" : "h-0"} mb-1 2xl:mb-2  w-full transition-all duration-500 text-nowrap overflow-hidden`}>
-                        GPA: <i>3.81</i>
+                        GPA: <i>3.85</i>
                     </div>
                     <div
                         className={`${hover2 ? "h-32" : "h-0"} text-gray-300 text-sm w-full transition-all duration-700  overflow-hidden`}>

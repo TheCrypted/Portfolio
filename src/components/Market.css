@@ -1,0 +1,42 @@
+.market-scenes { color: #efedf5; font-family: Georgia, 'Times New Roman', serif; width: 100%; }
+.market-scenes * { box-sizing: border-box; }
+.market-scenes h2, .market-scenes p, .market-scenes figure { margin: 0; }
+.market-scenes h2 { font-size: clamp(3rem, 5.6vw, 5.8rem); font-weight: 400; line-height: .98; letter-spacing: -.045em; }
+.market-scenes h2 em { font-weight: 400; color: #c9b0f1; }
+.market-scenes .market-eyebrow { margin-bottom: 2rem; color: #aba7c6; font: 11px/1.5 ui-monospace, monospace; letter-spacing: .13em; text-transform: uppercase; }
+.market-scenes .market-role { margin-top: 1.8rem; font-size: 1.05rem; line-height: 1.6; }
+.market-scenes .market-role span { display: block; color: #a8a3bd; font: 12px/1.8 ui-monospace, monospace; }
+.market-scenes .market-description { max-width: 36ch; margin-top: 1.2rem; color: #b8b5c8; font: 17px/1.75 Georgia, serif; }
+.market-scenes .market-ledger { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: center; gap: clamp(2rem, 6vw, 7rem); padding: 6rem clamp(1.5rem, 5vw, 5rem) 7rem; }
+.market-scenes .market-ledger-copy { min-width: 0; }
+.market-scenes .market-ledger-art { min-width: 0; }
+.market-scenes .market-ledger-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+.market-scenes .market-ledger-branches { stroke: #a88fc340; stroke-width: .75; }
+.market-scenes .market-ledger-branches circle { stroke: #bba0d4; fill: #110e2d; }
+.market-scenes .market-ledger-wire { stroke: #8b73a9; stroke-width: 1; }
+.market-scenes .market-ledger-flow { stroke: #e5c1ff; stroke-width: 1.5; stroke-dasharray: 7 24; filter: drop-shadow(0 0 4px #cda1ff); animation: market-ledger-travel 4s linear infinite; }
+.market-scenes .market-node { cursor: none; }
+.market-scenes .market-node:focus-visible { outline: none; }
+.market-scenes .market-node-face { fill: #110e2d; stroke: #a88ac7; stroke-width: 1; }
+.market-scenes .market-node-detail { stroke: #a88ac7; stroke-width: .75; }
+.market-scenes .market-node-orbit { stroke: #9e7ec345; stroke-width: .75; stroke-dasharray: 2 7; }
+.market-scenes .market-node.is-active .market-node-face { stroke: #eccbff; filter: drop-shadow(0 0 7px #bb8cf36b); }
+.market-scenes .market-node.is-active .market-node-detail { stroke: #eccbff; }
+.market-scenes .market-node.is-active .market-node-orbit { stroke: #e2b9ff; animation: market-node-pulse 2.5s ease-in-out infinite; }
+.market-scenes .market-node:focus-visible .market-node-orbit { stroke: #f0e1ff; stroke-width: 2; stroke-dasharray: none; animation: none; }
+.market-scenes [data-running="false"] *, .market-scenes [data-running="false"] *::before, .market-scenes [data-running="false"] *::after { animation-play-state: paused; }
+@keyframes market-ledger-travel { to { stroke-dashoffset: -124; } }
+@keyframes market-node-pulse { 50% { opacity: .3; } }
+@media (max-width: 900px) {
+    .market-scenes .market-ledger { gap: 2rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding-top: 4rem; padding-bottom: 5rem; }
+    .market-scenes h2 { font-size: clamp(3rem, 7vw, 4.6rem); }
+}
+@media (max-width: 600px) {
+    .market-scenes .market-ledger { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; padding: 3.5rem 1.5rem 4rem; }
+    .market-scenes h2 { font-size: 3.5rem; }
+    .market-scenes .market-eyebrow { margin-bottom: 1.5rem; }
+    .market-scenes .market-description { max-width: 38ch; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .market-scenes *, .market-scenes *::before, .market-scenes *::after { animation: none !important; transition: none !important; }
+}

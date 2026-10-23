@@ -6,6 +6,7 @@ import {BorderMarq, BorderMarqY} from "../helpers/BorderMarq.jsx";
 import {MovingBackground} from "../components/MovingBackground.jsx";
 import {Cursor} from "../components/Cursor.jsx";
 import {LoadAnim} from "../components/LoadAnim.jsx";
+import {Link} from "react-router-dom";
 
 
 export function Home() {
@@ -45,15 +46,19 @@ export function Home() {
                         <div className={`transition-all flex items-center justify-center w-2/3`}>
                             <MovingBackground />
                         </div>
-                        <div onMouseEnter={() => setTHalf(true)} onMouseLeave={() => setTHalf(false)} className={`text-4xl font-semibold font-serif  bg-contain border-l-2 border-black transition-all duration-500 ${tHalf ? "w-2/3" : "w-1/3"} flex items-center justify-center`}>
-                            Résumé<b className="text-green-500">.</b>
-                        </div>
+                        <Link to="/Work"
+                           onMouseEnter={() => {setTHalf(true); setLinkOver(true)}}
+                           onMouseLeave={() => {setTHalf(false); setLinkOver(false)}}
+                           className={`text-4xl font-semibold font-serif bg-contain border-l-2 border-black transition-all duration-500 ${tHalf ? "w-2/3" : "w-1/3"} flex items-center justify-center`}>
+                            Work<b className="text-green-500">.</b>
+                        </Link>
                     </div>
                     <div onMouseEnter={() => setYHalf(false)} onMouseLeave={() => setYHalf(true)} className={`w-full transition-all h-2/3 flex`}>
                         <div className={`text-4xl font-semibold font-serif flex items-center justify-center transition-all duration-500 ${!bHalf ? "w-2/3" : "w-1/3"}`}>
                             Miscellaneous<b className="text-yellow-500">.</b>
                         </div>
                         <div onMouseEnter={() => setBHalf(true)} onMouseLeave={() => setBHalf(false)} className={`text-nowrap flex items-center justify-end border-l-2 text-blue-950 py-2 ${bHalf ? "text-opacity-5" : "text-opacity-0"} font-serif relative text-7xl text-right border-black transition-all duration-500 ${bHalf ? "w-2/3" : "w-1/3"}`}>
+                            Bloomberg<br />
                             Cadence Design Systems<br />
                             Formula Student<br />
                             Hyperloop Edinburgh<br />

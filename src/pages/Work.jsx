@@ -1,7 +1,8 @@
 import {Cursor} from "../components/Cursor.jsx";
-import React, {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import PropTypes from "prop-types";
 import {LoadAnim} from "../components/LoadAnim.jsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Canvas} from "@react-three/fiber";
 import {ReactiveLink} from "../helpers/ReactiveLink.jsx";
 import me1 from "../assets/me1.png"
@@ -18,6 +19,8 @@ import {Marquee} from "../components/Marquee.jsx";
 import DateObject from "react-date-object";
 import {queryLinkOver} from "../context/LinkOverTrigger.jsx";
 import {Market} from "../components/Market.jsx";
+import {BloombergFeature} from "../components/BloombergFeature.jsx";
+import "./Work.css";
 
 const ObserverComponent = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -28,7 +31,7 @@ const ObserverComponent = ({ children }) => {
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    observer.unobserve(ref.current); // Stop observing once in view
+                    observer.unobserve(entry.target); // Stop observing once in view
                 }
             },
             { threshold: 0.1 } // Adjust threshold as needed
@@ -42,12 +45,14 @@ const ObserverComponent = ({ children }) => {
     return <div className="w-full h-full" ref={ref}>{isVisible ? children : null}</div>;
 };
 
+ObserverComponent.propTypes = {children: PropTypes.node.isRequired};
+
 export const Work = () => {
     const mindiv = useRef(null);
     const [loaded, setLoaded] = useState(false);
     const [bustY, setBustY] = useState(0)
     const navigate = useNavigate();
-    const [diRot, setDiRot] = useState(0)
+    const navigationTimer = useRef();
     const mousePos = useMousePosition();
     const track_arr = Array.from({length: 15}, (_, ind) => ind)
     const {setLinkOver} = queryLinkOver();
@@ -62,28 +67,33 @@ export const Work = () => {
     });
 
     useEffect(() => {
-
-        mindiv.current.addEventListener("scroll", () => {
-            setBustY(mindiv.current.scrollTop/100)
-        })
-
-        const interval = setInterval(() => setDiRot(prev => (prev + 0.01) % (Math.PI * 2)), 40)
-
-        setTimeout(() => {
-            setLoaded(true);
-        }, 1000);
-
+        const scroller = mindiv.current;
+        let frame;
+        const onScroll = () => {
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+                setBustY(scroller.scrollTop / 100);
+                frame = undefined;
+            });
+        };
+        scroller.addEventListener("scroll", onScroll, {passive: true});
+        const readyTimer = setTimeout(() => setLoaded(true), 1000);
         return () => {
-            clearInterval(interval);
-        }
+            scroller.removeEventListener("scroll", onScroll);
+            cancelAnimationFrame(frame);
+            clearTimeout(readyTimer);
+            clearTimeout(navigationTimer.current);
+        };
     }, []);
 
-    const changePage = (dest) => {
+    const changePage = (event, destination) => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+        event.preventDefault();
         setLoaded(false);
-        setTimeout(() => {
-            navigate(dest)
-        }, 2000)
-    }
+        setLinkOver(false);
+        clearTimeout(navigationTimer.current);
+        navigationTimer.current = setTimeout(() => navigate(destination), 2000);
+    };
 
     const convertMouseCoordinnatesTo3d = (mousepos) => {
         const x = mousepos.x / window.innerWidth * 2 - 1;
@@ -95,27 +105,17 @@ export const Work = () => {
         <>
             <LoadAnim loaded={loaded}/>
             <div ref={mindiv}
-                 className="w-full cursor-none h-[120%] bg-[#110e2d] scrollbar overflow-x-hidden overflow-auto">
+                 className="work-page w-full cursor-none h-full bg-[#110e2d] scrollbar overflow-x-hidden overflow-auto">
                 <Cursor/>
-                <div
-                    className="cursor-none absolute z-40 top-0 w-full h-16 bg-[#1d184f] bg-opacity-30 backdrop-blur-2xl border-b border-gray-600 shadow-xl pl-14 grid grid-cols-[5%_5%_5%_30%_55%]">
-                    <div onClick={() => changePage("/")}
-                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">HOME
-                    </div>
-                    <div
-                        className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">WORK
-                    </div>
-                    <div onClick={() => changePage("/Projects")}
-                         className="font-serif text-white text-sm flex items-center transition-all hover:[filter:blur(1px)]">PROJECTS
-                    </div>
-                    <div className="absolute  right-0 full h-full flex items-center justify-center pr-14">
-                        <div
-                            className=" bg-gradient-to-br from-[rgba(255,255,255,0.3)] to-[rgba(255,255,255,0.05)] font-serif w-auto px-3 h-3/5 bg-opacity-20 text-gray-300 rounded-full flex items-center justify-center">
-                            Website under active development
-                        </div>
-                    </div>
-                </div>
-                <div className="w-full h-4/5 relative">
+                <nav className="work-nav" aria-label="Main navigation">
+                    <Link to="/" onClick={event => changePage(event, "/")}
+                          onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}>HOME</Link>
+                    <span aria-current="page">WORK</span>
+                    <Link to="/Projects" onClick={event => changePage(event, "/Projects")}
+                          onMouseEnter={() => setLinkOver(true)} onMouseLeave={() => setLinkOver(false)}>PROJECTS</Link>
+                    <span className="work-nav-status">Website under active development</span>
+                </nav>
+                <div className="work-opening w-full h-4/5 relative">
                     <div
                         className="w-full absolute cursor-none flex  justify-between flex-col h-full text-[#110e2d] text-6xl mb-8">
                         {
@@ -153,37 +153,7 @@ export const Work = () => {
                 </div>
 
 
-                <div className="w-full relative cursor-none h-[60%]">
-                    <div className="w-full relative h-full bg-[#110e2d] overflow-hidden">
-                        <div className="absolute pl-14 pr-14 top-0 w-full h-full flex justify-between">
-                            <div className="w-1/3 h-full flex items-center text-white">
-                                <div>
-                                    <div
-                                        className="text-white flex items-center mb-2 justify-center font-serif text-3xl">
-                                        Software Engineering Intern
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="w-1/3 h-full flex items-center justify-center">
-                            </div>
-                            <div className="w-1/3 h-full flex items-center">
-                                <div>
-                                    <div
-                                        className="text-white flex items-end justify-center font-serif text-3xl mb-2">Bloomberg
-                                    </div>
-                                    <div
-                                        className="text-gray-400 items-center flex justify-between text-2xl w-full font-serif italic mb-8">
-                                        [C++, Kafka]
-                                    </div>
-                                    <div
-                                        className="opacity-70 text-justify justify-center items-center text-white flex font-serif text-2xl">
-                                        Redesigned critical trading infrastructure for the Electronic Trading team, engineering low-latency distributed systems with strict performance and reliability constraints.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <BloombergFeature/>
                 <div className="w-full relative cursor-none pl-14">
                     <div className="w-full h-20 flex justify-between">
                         <div className="w-1/3"/>
@@ -193,7 +163,7 @@ export const Work = () => {
                         <div className="w-1/3"/>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none h-[60%]">
+                <div className="work-cadence w-full relative cursor-none h-[60%]">
                     <div style={{backgroundImage: `url("${adamHand}")`, backgroundPosition: 'center 0%', backgroundSize: '100% auto'}} className="w-full relative h-full bg-[#110e2d] bg-no-repeat overflow-hidden">
                         <div className="absolute pl-14 top-0 w-full h-full flex justify-between">
                             <div className="w-1/3 h-full flex items-center">
@@ -234,9 +204,10 @@ export const Work = () => {
                         <div className="w-1/3"/>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none h-[60%]">
+                <div className="work-formula w-full relative cursor-none h-[60%]">
                     <div className="w-full relative h-full bg-[#110e2d] overflow-hidden">
-                        <Canvas camera={{position: [0, 0, 1]}}>
+                        <Canvas frameloop="demand" dpr={[1, 1.5]} camera={{position: [0, 0, 1]}}>
+                            {/* eslint-disable-next-line react/no-unknown-property */}
                             <pointLight position={convertMouseCoordinnatesTo3d(mousePos)} intensity={10}/>
                             <F1Car rotation={[Math.PI / 2, 0, 0]} position={[0.0, -1.0, -7.0]}/>
                         </Canvas>
@@ -277,7 +248,7 @@ export const Work = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full relative cursor-none bg-[#110e2d] h-[80%]">
+                <div className="work-hyperloop w-full relative cursor-none bg-[#110e2d] h-[80%]">
                     <div className="flex justify-end">
                         <div
                             className="w-1/2 h-20 border-b-4 border-white border-opacity-40 border-l-4 rounded-bl-3xl"/>
@@ -309,11 +280,9 @@ export const Work = () => {
                     </div>
                 </div>
                 <div className="w-full h-40" />
-                <div className="w-full relative cursor-none bg-[#110e2d] h-[60%]">
-                    <Market />
-                </div>
+                <Market/>
                 <div
-                    className="w-full relative grid grid-cols-[20%_60%_20%] h-[20%] pt-6 pb-6 bg-opacity-40 text-2xl font-serif text-white"> {/*  bg-[#191443]*/}
+                    className="work-footer w-full relative grid grid-cols-[20%_60%_20%] h-[20%] pt-6 pb-6 bg-opacity-40 text-2xl font-serif text-white"> {/*  bg-[#191443]*/}
                     <div className="text-sm pl-14 flex items-center ">
                         <div>
                             <div>Aman Sharma</div>

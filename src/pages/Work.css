@@ -1,0 +1,49 @@
+/* Design guide: read the repository DESIGN.md before changing portfolio visuals. */
+.work-page { position: relative; font-family: ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif; }
+.work-nav { position: fixed; inset: 0 0 auto; z-index: 40; display: flex; align-items: center; gap: 32px; height: 64px; padding: 0 56px; color: #fff; background: #1d184f4d; backdrop-filter: blur(24px); border-bottom: 1px solid #4b5563; box-shadow: 0 20px 25px -5px #0000001a; font-size: 14px; }
+.work-nav a { color: #fff; text-decoration: none; transition: filter 180ms; }
+.work-nav a:hover { filter: blur(1px); }
+.work-nav a:focus-visible { outline: 1px solid #fff; outline-offset: 7px; }
+.work-nav-status { margin-left: auto; display: flex; align-items: center; height: 60%; padding: 0 12px; border-radius: 999px; color: #d1d5db; background: linear-gradient(to bottom right, #ffffff4d, #ffffff0d); }
+.work-opening { height: 96svh; overflow: hidden; }
+.work-cadence, .work-formula { height: max(600px, 72svh); }
+.work-hyperloop { height: max(680px, 96svh); overflow: hidden; }
+.work-footer { height: max(180px, 24svh); }
+@media (min-width: 761px) and (max-width: 1100px) {
+    .work-cadence img { width: 220px; height: 220px; }
+    .work-cadence .text-2xl, .work-formula .text-2xl { font-size: 20px; text-align: left; }
+    .work-cadence .text-3xl, .work-formula .text-3xl { font-size: 26px; }
+}
+@media (max-width: 760px) {
+    .work-nav { padding: 0 22px; gap: 24px; font-size: 12px; }
+    .work-nav-status { display: none; }
+    .work-cadence { height: auto; min-height: 760px; }
+    .work-cadence > div { min-height: inherit; background-position: center bottom !important; background-size: auto 70% !important; }
+    .work-cadence > div > div { position: relative; padding: 36px 24px; flex-direction: column; gap: 20px; }
+    .work-cadence > div > div > div { width: 100%; height: auto; }
+    .work-cadence > div > div > div:nth-child(2) { height: 260px; }
+    .work-cadence .text-3xl { font-size: 27px; }
+    .work-cadence .text-2xl { font-size: 19px; text-align: left; }
+    .work-cadence img { width: 220px; height: 220px; }
+    .work-formula { height: 850px; }
+    .work-formula canvas { pointer-events: none; }
+    .work-formula > div > div:last-child { padding: 28px 24px; flex-direction: column; }
+    .work-formula > div > div:last-child > div { width: 100%; height: auto; }
+    .work-formula > div > div:last-child > div:nth-child(2) { flex: 1; }
+    .work-formula > div > div:last-child > div:nth-child(2) > div { display: none; }
+    .work-formula .text-3xl { font-size: 27px; }
+    .work-formula .text-2xl { font-size: 19px; text-align: left; }
+    .work-formula .text-xl { font-size: 18px; text-align: left; }
+    .work-hyperloop { height: 680px; }
+    .work-hyperloop .px-14 { padding-left: 24px; padding-right: 24px; gap: 12px; }
+    .work-hyperloop .text-3xl { font-size: 22px; line-height: 1.35; }
+    .work-hyperloop .text-8xl { font-size: 48px; }
+    .work-hyperloop .grid-rows-\[30\%_40\%_30\%\] > div:last-child { padding: 0 24px 24px; text-align: left; }
+    .work-footer { grid-template-columns: 1fr 1fr; height: 180px; }
+    .work-footer > div:first-child { padding-left: 24px; }
+    .work-footer > div:nth-child(2) { display: none; }
+    .work-footer > div:last-child { padding-right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .work-page *, .work-page *::before, .work-page *::after { animation: none !important; transition: none !important; }
+}

@@ -20,8 +20,6 @@ import name_img from "../assets/name.png"
 function Model({ open, hinge, ...props }) {
     const group = useRef()
     const { nodes, materials } = useGLTF(model)
-    const [hovered, setHovered] = useState(false)
-    useEffect(() => void (document.body.style.cursor = hovered ? 'pointer' : 'auto'), [hovered])
 
     useFrame((state) => {
         const t = state.clock.getElapsedTime()
@@ -51,7 +49,7 @@ function Model({ open, hinge, ...props }) {
     })
 
     return (
-        <group ref={group} {...props} onPointerOver={(e) => (e.stopPropagation(), setHovered(true))} onPointerOut={(e) => setHovered(false)} dispose={null}>
+        <group ref={group} {...props} dispose={null}>
             <three.group rotation-x={hinge} position={[0, -0.04, 0.41]}>
                 <group position={[0, 2.96, -0.13]} rotation={[Math.PI / 2, 0, 0]}>
                     <mesh material={materials.aluminium} geometry={nodes['Cube008'].geometry} />
@@ -152,8 +150,7 @@ export const About = () => {
                     About <b className="text-blue-600">/</b>
                     <div className="w-full h-auto flex">
                         <div className="w-1/2 text-white mt-6 mb-6 text-5xl xl:text-6xl">
-                            Full-stack developer studying at the University of Edinburgh. Building scalable,
-                            user-friendly applications.
+                            Software engineer at Bloomberg. Building systems and financial software.
                         </div>
                     </div>
                     <div className="absolute right-0 w-2/5 flex items-center top-0 h-full">
@@ -164,7 +161,7 @@ export const About = () => {
                 <div className="w-full h-full pt-6 pb-6 text-2xl font-serif pl-14 pr-14 text-white">
                     Work Experience <b className="text-blue-600">/</b>
                     <div className="w-full overflow-hidden h-auto">
-                        <ExpBlock ind={"00"} rot={-8} z={4} role="Software Engineer Intern">Bloomberg</ExpBlock>
+                        <ExpBlock ind={"00"} rot={-8} z={4} role="Software Engineer · Full-time">Bloomberg</ExpBlock>
                         <ExpBlock ind={"01"} rot={7} z={1} role="Software Engineering Intern">Cadence</ExpBlock>
                         <ExpBlock ind={"02"} rot={-10} z={4} role="Simulation Software Engineer">Formula
                             Student</ExpBlock>
@@ -183,13 +180,9 @@ export const About = () => {
                 <div className="w-full h-2/3 pt-6 pb-6 text-2xl font-serif pl-14 pr-14 text-white">
                     Selected Projects <b className="text-blue-600">/</b>
                     <div className="w-full pt-12 h-full flex">
-                        <ProjBlock open={expand} setOpen={setExpand} ind={0}>Calendar +</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={1}>Grocery +</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={2}>Web Chat +</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={3}>Ray Tracer</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={4}>Plant Guard</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={5}>FinWiz +</ProjBlock>
-                        <ProjBlock open={expand} setOpen={setExpand} ind={6}>Search Engine  </ProjBlock>
+                        <ProjBlock open={expand} setOpen={setExpand} ind={0}>Ray Tracer</ProjBlock>
+                        <ProjBlock open={expand} setOpen={setExpand} ind={1}>FinWiz +</ProjBlock>
+                        <ProjBlock open={expand} setOpen={setExpand} ind={2}>Search Engine</ProjBlock>
                     </div>
                 </div>
                 <div className="w-full h-20"/>
